@@ -4,6 +4,8 @@ import { useI18n } from '../i18n'
 import { scrollToId } from './ui'
 import Updated from './Updated'
 import { VERIFIED_ON } from '../data/providers'
+import { PASS } from '../lib/calc'
+import { inr } from '../lib/format'
 import { track } from '../lib/analytics'
 
 export default function Hero() {
@@ -116,7 +118,7 @@ function HeroArt() {
           </div>
           <div className="mt-2 flex items-baseline gap-1.5">
             <span className="text-[17px] font-semibold">{t.hero.artLocal}</span>
-            <span className="num ml-auto text-[22px] font-semibold">₹1,500</span>
+            <span className="num ml-auto text-[22px] font-semibold">{inr(PASS.localOutside)}</span>
             <span className="text-[13px] text-ink-mute">{t.hero.artPerYear}</span>
           </div>
           <p className="mt-1.5 flex items-center gap-1.5 text-[13.5px] text-brand-700">

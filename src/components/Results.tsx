@@ -9,6 +9,7 @@ import { track } from '../lib/analytics'
 import { site } from '../config'
 import { scrollToId } from './ui'
 import { PASS } from '../lib/calc'
+import { ChangeNotes, VerifyLine } from './Verify'
 import { OTHER_CROSSINGS, passVehicle, roundTripsOf, type Answers } from './Wizard'
 
 interface Props {
@@ -214,7 +215,7 @@ function ProviderCard({ pick, featured, lang, inCompare, onToggle }: { pick: Pro
       <p className="mt-4 flex items-center gap-1.5 text-[13.5px] text-ink-soft">
         <Phone size={14} /> {p.support ? <span className="num select-all">{p.support}</span> : r.supportNone}
       </p>
-      <p className="mt-1 text-[12.5px] text-ink-mute">{r.verified} {fmtDate(p.verifiedOn, lang)}</p>
+      <div className="mt-2 grid gap-2"><VerifyLine p={p} /><ChangeNotes p={p} /></div>
       <div className="mt-5 flex flex-wrap gap-2 pt-1 sm:mt-auto">
         <a href={providerLink(p)} target="_blank" rel={p.affiliateUrl ? 'sponsored noopener' : 'noopener'}
           onClick={() => track('provider_link_clicked', { provider: p.id, source: 'results', affiliate: Boolean(p.affiliateUrl) })}

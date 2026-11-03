@@ -1,5 +1,9 @@
 // Renders the social share image (public/og.png) at build time.
 import sharp from 'sharp'
+import { readFileSync } from 'node:fs'
+
+const rates = JSON.parse(readFileSync(new URL('../src/data/rates.json', import.meta.url), 'utf8'))
+const inr = (n) => '₹' + n.toLocaleString('en-IN')
 
 const row = (y, label, value, highlight = false) => `
   <text x="840" y="${y}" font-size="26" fill="#ffffff" font-family="DejaVu Sans, Arial, sans-serif">${label}</text>
@@ -22,8 +26,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <text x="72" y="430" font-size="28" fill="#3b4a5e" font-family="DejaVu Sans, Arial, sans-serif">Compare providers and see which toll pass</text>
   <text x="72" y="470" font-size="28" fill="#3b4a5e" font-family="DejaVu Sans, Arial, sans-serif">saves you the most.</text>
   <text x="840" y="200" font-size="17" font-weight="700" letter-spacing="2" fill="#a6e6cb" font-family="DejaVu Sans, Arial, sans-serif">TOLL PASSES · 2026-27</text>
-  ${row(270, 'Local pass', '₹1,500', true)}
-  ${row(340, 'Annual pass', '₹3,075')}
+  ${row(270, 'Local pass', inr(rates.passes.values.localOutside), true)}
+  ${row(340, 'Annual pass', inr(rates.passes.values.annual))}
   ${row(410, 'Monthly pass', '≈ ₹350')}
   ${row(480, 'Pay per trip', 'Full toll')}
 </svg>`

@@ -1,0 +1,58 @@
+name: Check FASTag rates
+
+# Reads each provider's official fee page and NHAI's pass page, then updates
+# src/data/rates.json when a change is confirmed on two checks in a row.
+# It commits only when something changed, so most runs do nothing.
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # test window: every 5 minutes until TEST_UNTIL, then skipped
+    - cron: '17 1 * * *'    # daily at 06:47 IST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: check-rates
+  cancel-in-progress: false
+
+env:
+  TEST_UNTIL: '2026-11-04T10:45:00Z' # 24 hours of 5-minute checks, then daily only
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Skip 5-minute runs after the test window
+        id: gate
+        run: |
+          if [ "${{ github.event.schedule }}" = "*/5 * * * *" ] && [ "$(date -u +%s)" -gt "$(date -u -d "$TEST_UNTIL" +%s)" ]; then
+            echo "Test window over; the daily run takes over."
+            echo "skip=1" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.skip != '1'
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.skip != '1'
+        with:
+          node-version: 22
+
+      - name: Check official sources
+        id: check
+        if: steps.gate.outputs.skip != '1'
+        run: node scripts/rates/run.mjs
+
+      - name: Commit if anything changed
+        if: steps.gate.outputs.skip != '1'
+        run: |
+          if git diff --quiet; then echo "Nothing changed."; exit 0; fi
+          # Commit as the site owner so Vercel deploys the update.
+          git config user.name "swepoojan"
+          git config user.email "189081836+swepoojan@users.noreply.github.com"
+          git add src/data/rates.json scripts/rates/report.json
+          git commit -m "Rates check: ${{ steps.check.outputs.summary }}"
+          git pull --rebase --quiet origin main
+          git push

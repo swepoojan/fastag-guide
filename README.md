@@ -25,8 +25,9 @@ npm run build   # builds the share image, type-checks and bundles to dist/
 
 | What | File |
 | --- | --- |
-| Provider fees, links, verification dates, affiliate links | `src/data/providers.ts` |
-| Toll pass prices | `src/lib/calc.ts` (`PASS`) |
+| Provider descriptions, links, affiliate links | `src/data/providers.ts` |
+| Fees, pass prices, verification dates, change history (updated automatically) | `src/data/rates.json` |
+| Where the checker reads each figure | `scripts/rates/sources.mjs` |
 | Cost comparison logic | `src/lib/calc.ts` |
 | Provider picks | `src/lib/recommend.ts` |
 | All text, FAQs and legal copy (English + Hindi) | `src/i18n.tsx` |
@@ -34,6 +35,23 @@ npm run build   # builds the share image, type-checks and bundles to dist/
 | Analytics events and sinks | `src/lib/analytics.ts` |
 
 Set a provider's `affiliateUrl` only once you have an approved affiliate or referral link; until then the "View provider" button uses the verified official page. Picks never depend on commission.
+
+## Automatic rate updates
+
+A GitHub Actions job (`.github/workflows/check-rates.yml`) runs daily, plus every 5 minutes during a 24-hour test window. It reads each official page twice and updates `src/data/rates.json` on its own, with these safeguards:
+
+- A value must be in a plausible range and must not jump by more than ₹150 or 100% at once.
+- A new value must be seen on **two checks in a row** before it is published, so a one-off glitch is ignored.
+- If a page can't be read twice in a row, the old figure stays and the site shows "Couldn't verify since …" instead of a fresh date.
+- It commits only when something changed; Vercel then redeploys. `scripts/rates/report.json` records what was found on each page.
+
+See it work without touching live data:
+
+```bash
+npm test                                         # includes the fee-change simulation
+node scripts/rates/simulate.mjs /tmp/demo.json   # step-by-step log of a ₹100 → ₹120 change
+node scripts/rates/run.mjs --dry-run             # check the live sources, write nothing
+```
 
 ## Disclaimer
 

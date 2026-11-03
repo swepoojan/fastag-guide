@@ -1,12 +1,17 @@
-// Toll pass prices for tax year 2026-27, as announced by MoRTH / NHAI.
+import rates from '../data/rates.json'
+
+// Toll pass prices come from src/data/rates.json, which the automatic checker keeps up to date.
 export const PASS = {
-  annual: 3075, // ₹, valid 200 crossings or 1 year
+  annual: rates.passes.values.annual, // ₹, valid 200 crossings or 1 year
   annualCrossings: 200,
-  localOutside: 1500, // ₹/year, plaza outside municipal or town limits
-  localInside: 3000, // ₹/year, plaza inside municipal or town limits
+  localOutside: rates.passes.values.localOutside, // ₹/year, plaza outside municipal or town limits
+  localInside: rates.passes.values.localInside, // ₹/year, plaza inside municipal or town limits
   monthlyTypical: 350, // ₹/month, varies by plaza
-  verifiedOn: '2026-11-03',
+  verifiedOn: rates.passes.lastVerified,
+  status: rates.passes.status as VerifyStatus,
 }
+
+export type VerifyStatus = 'ok' | 'pending' | 'unverified'
 
 export type PlazaType = 'outside' | 'inside' | 'unsure'
 export type OptionId = 'pay' | 'annual' | 'local' | 'monthly'

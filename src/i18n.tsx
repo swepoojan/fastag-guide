@@ -1,4 +1,11 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { PASS } from './lib/calc'
+import { feeRange } from './data/providers'
+import { inr, range } from './lib/format'
+
+// Prices quoted in text come from the data file, so an automatic update never leaves stale copy.
+const A = inr(PASS.annual), LO = inr(PASS.localOutside), LI = inr(PASS.localInside)
+const ISS = feeRange('issuanceFee'), DEP = feeRange('securityDeposit'), MIN = feeRange('minBalance')
 
 export type Lang = 'en' | 'hi'
 
@@ -101,7 +108,7 @@ const en = {
     r_notEligible: 'Not eligible',
     r_notOffered: 'Not offered',
     r_noTrips: 'No trips',
-    w_unsureTown: 'You weren’t sure about the plaza’s location, so the local pass is priced at ₹3,000. It’s ₹1,500 if the plaza is outside town limits.',
+    w_unsureTown: `You weren’t sure about the plaza’s location, so the local pass is priced at ${LI}. It’s ${LO} if the plaza is outside town limits.`,
     w_unsureDist: 'NHAI checks the 20 km distance from your registered address in the RajmargYatra app before you pay.',
     w_comm: 'The annual and local passes are only for private cars, jeeps and vans, so commercial vehicles pay normal toll.',
     w_other: 'The annual and local passes are for private cars, jeeps and vans. Check with your FASTag issuer for other vehicle types.',
@@ -130,6 +137,10 @@ const en = {
     pros: 'Good',
     cons: 'Watch out',
     verified: 'Checked on',
+    unverified: 'Couldn’t verify since',
+    pending: 'Confirming a possible change seen on',
+    changed: (d: string, f: string, a: string, b: string) => `Updated ${d}: ${f} ${a} → ${b}`,
+    lastChecked: 'Last checked',
     view: 'View provider',
     compare: 'Compare',
     compared: 'In comparison',
@@ -155,16 +166,16 @@ const en = {
     h2: 'Drive more. Pay less toll.',
     sub: 'Two NHAI passes now work on your existing FASTag. Here’s how they compare.',
     annualH: 'FASTag Annual Pass',
-    annualPrice: '₹3,075 for 2026-27',
+    annualPrice: `${A} for 2026-27`,
     a1: '200 toll plaza crossings or one year, whichever ends first',
     a2: 'For private cars, jeeps and vans with a valid FASTag',
     a3: 'Works at about 1,150 national highway and expressway plazas, not state highway plazas',
     a4: 'A return trip through the same plaza counts as two crossings',
     a5: 'Buy in the RajmargYatra app or on the NHAI website',
     localH: 'FASTag Local Pass',
-    localPrice: '₹1,500 or ₹3,000 a year',
+    localPrice: `${LO} or ${LI} a year`,
     l1: 'Unlimited crossings at one plaza within 20 km of your home',
-    l2: '₹1,500 if the plaza is outside town limits, ₹3,000 if inside',
+    l2: `${LO} if the plaza is outside town limits, ${LI} if inside`,
     l3: 'Private vehicles only; not on entry-exit tolled expressways or where a free service road exists',
     l4: 'At plazas from 1 Nov 2026, in the RajmargYatra app from 1 Dec 2026',
     calcH: 'Is the annual pass worth it?',
@@ -315,7 +326,7 @@ const hi: Dict = {
     r_notEligible: 'पात्र नहीं',
     r_notOffered: 'उपलब्ध नहीं',
     r_noTrips: 'कोई यात्रा नहीं',
-    w_unsureTown: 'आपको प्लाज़ा की जगह पक्की नहीं पता, इसलिए लोकल पास ₹3,000 माना गया है। शहर की सीमा से बाहर होने पर ₹1,500 है।',
+    w_unsureTown: `आपको प्लाज़ा की जगह पक्की नहीं पता, इसलिए लोकल पास ${LI} माना गया है। शहर की सीमा से बाहर होने पर ${LO} है।`,
     w_unsureDist: 'पैसे देने से पहले NHAI, RajmargYatra ऐप में आपके रजिस्टर्ड पते से 20 किमी की दूरी जाँचता है।',
     w_comm: 'सालाना और लोकल पास सिर्फ़ निजी कार, जीप और वैन के लिए हैं, इसलिए कमर्शियल गाड़ियाँ सामान्य टोल देती हैं।',
     w_other: 'सालाना और लोकल पास निजी कार, जीप और वैन के लिए हैं। दूसरी गाड़ियों के लिए अपने FASTag बैंक से पूछें।',
@@ -344,6 +355,10 @@ const hi: Dict = {
     pros: 'अच्छा',
     cons: 'ध्यान दें',
     verified: 'जाँचा गया',
+    unverified: 'इस तारीख के बाद जाँच नहीं हो पाई:',
+    pending: 'संभावित बदलाव की पुष्टि हो रही है, पहली बार दिखा:',
+    changed: (d: string, f: string, a: string, b: string) => `${d} को अपडेट: ${f} ${a} → ${b}`,
+    lastChecked: 'आख़िरी जाँच',
     view: 'प्रोवाइडर देखें',
     compare: 'तुलना करें',
     compared: 'तुलना में',
@@ -369,16 +384,16 @@ const hi: Dict = {
     h2: 'ज़्यादा चलाएँ। कम टोल दें।',
     sub: 'NHAI के दो पास अब आपके मौजूदा FASTag पर काम करते हैं। इनकी तुलना देखें।',
     annualH: 'FASTag सालाना पास',
-    annualPrice: '2026-27 के लिए ₹3,075',
+    annualPrice: `2026-27 के लिए ${A}`,
     a1: '200 बार टोल प्लाज़ा पार करना या एक साल, जो पहले पूरा हो',
     a2: 'वैध FASTag वाली निजी कार, जीप और वैन के लिए',
     a3: 'लगभग 1,150 नेशनल हाईवे और एक्सप्रेसवे प्लाज़ा पर, स्टेट हाईवे प्लाज़ा पर नहीं',
     a4: 'एक ही प्लाज़ा से आना-जाना दो बार गिना जाता है',
     a5: 'RajmargYatra ऐप या NHAI वेबसाइट पर खरीदें',
     localH: 'FASTag लोकल पास',
-    localPrice: 'साल में ₹1,500 या ₹3,000',
+    localPrice: `साल में ${LO} या ${LI}`,
     l1: 'घर से 20 किमी के अंदर एक प्लाज़ा पर जितनी बार चाहें',
-    l2: 'प्लाज़ा शहर की सीमा से बाहर हो तो ₹1,500, अंदर हो तो ₹3,000',
+    l2: `प्लाज़ा शहर की सीमा से बाहर हो तो ${LO}, अंदर हो तो ${LI}`,
     l3: 'सिर्फ़ निजी गाड़ियाँ; एंट्री-एग्ज़िट टोल वाले एक्सप्रेसवे या मुफ़्त सर्विस रोड वाली जगह पर नहीं',
     l4: 'प्लाज़ा पर 1 नवंबर 2026 से, RajmargYatra ऐप में 1 दिसंबर 2026 से',
     calcH: 'क्या सालाना पास फ़ायदेमंद है?',
@@ -434,26 +449,26 @@ export const faqs: Record<Lang, Faq[]> = {
   en: [
     { q: 'What is FASTag?', a: 'FASTag is a sticker with an RFID chip that goes on your windscreen. It is linked to a prepaid wallet or bank account, and toll is deducted automatically as you drive through a toll plaza. It has been mandatory at national highway toll plazas since 15 December 2019.' },
     { q: 'How can I get a new FASTag?', a: 'Buy it from an issuing bank online, in its app, at a branch or at a point of sale near toll plazas. You need your vehicle’s registration certificate (RC) and your KYC. For new car FASTags issued from 1 February 2026, the bank must check your vehicle details against the VAHAN database before activating the tag, and there is no separate KYV step afterwards.', link: { href: 'https://nhai.gov.in/nhai/sites/default/files/2026-01/NHAI_Press_Release-01-01-2026-Eng.pdf', label: 'NHAI notice on KYV (1 Jan 2026)' } },
-    { q: 'Which FASTag provider is best?', a: 'For cars the charges are very similar: about ₹100 to issue, a ₹200 refundable deposit and a minimum balance of ₹0 to ₹150. The best choice is usually the bank you already use, or the one whose recharge method suits you. Every FASTag works at every toll plaza, and the annual and local passes work on any valid FASTag.' },
-    { q: 'What are the FASTag charges?', a: 'For a car, jeep or van, the six providers we checked charge about ₹100 to issue the tag and take a ₹200 security deposit, which is refunded when you close the tag. Some also need a minimum balance of ₹100 to ₹150. Recharge fees depend on how you pay. See the comparison table above for each provider.' },
+    { q: 'Which FASTag provider is best?', a: `For cars the charges are very similar: about ${range(ISS[0], ISS[1], ' to ')} to issue, a ${range(DEP[0], DEP[1], ' to ')} refundable deposit and a minimum balance of ${range(MIN[0], MIN[1], ' to ')}. The best choice is usually the bank you already use, or the one whose recharge method suits you. Every FASTag works at every toll plaza, and the annual and local passes work on any valid FASTag.` },
+    { q: 'What are the FASTag charges?', a: `For a car, jeep or van, the six providers we checked charge ${range(ISS[0], ISS[1], ' to ')} to issue the tag and take a ${range(DEP[0], DEP[1], ' to ')} security deposit, which is refunded when you close the tag. The minimum balance ranges from ${range(MIN[0], MIN[1], ' to ')}. Recharge fees depend on how you pay. See the comparison table above for each provider.` },
     { q: 'Can I have multiple FASTags for one vehicle?', a: 'No. Under NHAI’s “One Vehicle One FASTag” rule, only the most recently issued FASTag on a vehicle stays active. Older tags are deactivated or blacklisted, so surrender them through the bank that issued them.', link: { href: 'https://nhai.gov.in/nhai/sites/default/files/2024-01/Press_Release-One_Vehical_One_FASTag_0.pdf', label: 'NHAI press release' } },
     { q: 'How do I replace an existing FASTag?', a: 'If the tag is damaged or not reading, ask your issuing bank for a reissue; several banks charge ₹100. To switch banks, close your old FASTag with its issuer first, then buy the new one, because only one tag can be active on a vehicle.' },
     { q: 'What happens if my FASTag gets blacklisted?', a: 'Tags are usually blacklisted for low balance, pending KYC or a mismatch in vehicle details. Since 17 February 2025, if your tag has been blacklisted for more than 60 minutes before you reach the plaza and stays blacklisted 10 minutes after it is read, the payment is declined and you pay double toll. Recharging or fixing the issue with your bank clears it. Recharging within 10 minutes of the read may let you pay the normal toll.' },
-    { q: 'What is the FASTag Annual Pass?', a: 'A pass for private cars, jeeps and vans costing ₹3,075 for 2026-27. It covers 200 toll plaza crossings or one year, whichever ends first, at about 1,150 national highway and expressway plazas. Buy it in the RajmargYatra app or on the NHAI website; it activates on your existing FASTag within about two hours.' },
-    { q: 'What is the FASTag Local Pass?', a: 'From 1 November 2026, private vehicle owners living within 20 km of a national highway toll plaza can buy a yearly pass for that one plaza: ₹1,500 if the plaza is outside town limits, ₹3,000 if inside. It is not offered on entry-exit tolled expressways or where a free service road exists. NHAI checks your address digitally when you apply.', link: { href: 'https://rajmargyatra.nhai.gov.in/buy-fastag-local-pass', label: 'RajmargYatra local pass page' } },
+    { q: 'What is the FASTag Annual Pass?', a: `A pass for private cars, jeeps and vans costing ${A} for 2026-27. It covers 200 toll plaza crossings or one year, whichever ends first, at about 1,150 national highway and expressway plazas. Buy it in the RajmargYatra app or on the NHAI website; it activates on your existing FASTag within about two hours.` },
+    { q: 'What is the FASTag Local Pass?', a: `From 1 November 2026, private vehicle owners living within 20 km of a national highway toll plaza can buy a yearly pass for that one plaza: ${LO} if the plaza is outside town limits, ${LI} if inside. It is not offered on entry-exit tolled expressways or where a free service road exists. NHAI checks your address digitally when you apply.`, link: { href: 'https://rajmargyatra.nhai.gov.in/buy-fastag-local-pass', label: 'RajmargYatra local pass page' } },
     { q: 'Can I recharge FASTag online?', a: 'Yes. You can recharge through your issuing bank’s app or website, UPI apps, net banking or cards. Fees depend on the bank and the payment method. ICICI Bank, for example, charges nothing for UPI recharges, while HDFC Bank charges for net banking and credit card recharges.' },
     { q: 'How do I close an old FASTag?', a: 'Ask the bank that issued it to close the FASTag account, through its customer care, app or a branch, and remove the sticker from your windscreen. The security deposit is refunded on closure as per the bank’s terms.' },
   ],
   hi: [
     { q: 'FASTag क्या है?', a: 'FASTag एक RFID चिप वाला स्टिकर है जो विंडस्क्रीन पर लगता है। यह प्रीपेड वॉलेट या बैंक खाते से जुड़ा होता है और टोल प्लाज़ा से गुज़रते ही टोल अपने आप कट जाता है। 15 दिसंबर 2019 से नेशनल हाईवे टोल प्लाज़ा पर यह ज़रूरी है।' },
     { q: 'नया FASTag कैसे लें?', a: 'इसे किसी जारी करने वाले बैंक से ऑनलाइन, उसके ऐप में, ब्रांच में या टोल प्लाज़ा के पास पॉइंट ऑफ़ सेल पर खरीदें। आपको गाड़ी की RC और अपना KYC चाहिए। 1 फ़रवरी 2026 से जारी नए कार FASTag के लिए बैंक को टैग चालू करने से पहले VAHAN डेटाबेस से गाड़ी की जानकारी जाँचनी होती है, बाद में अलग KYV की ज़रूरत नहीं।', link: { href: 'https://nhai.gov.in/nhai/sites/default/files/2026-01/NHAI_Press_Release-01-01-2026-Eng.pdf', label: 'KYV पर NHAI नोटिस (1 जनवरी 2026)' } },
-    { q: 'कौन सा FASTag प्रोवाइडर सबसे अच्छा है?', a: 'कारों के लिए शुल्क लगभग एक जैसे हैं: जारी करने के लगभग ₹100, ₹200 वापसी योग्य डिपॉज़िट और ₹0 से ₹150 तक न्यूनतम बैलेंस। आमतौर पर सबसे अच्छा वही बैंक है जिसे आप पहले से इस्तेमाल करते हैं, या जिसका रिचार्ज तरीका आपको सही लगे। हर FASTag हर टोल प्लाज़ा पर चलता है, और सालाना व लोकल पास किसी भी वैध FASTag पर काम करते हैं।' },
-    { q: 'FASTag के शुल्क क्या हैं?', a: 'कार, जीप या वैन के लिए हमने जिन छह प्रोवाइडर को जाँचा, वे टैग जारी करने के लगभग ₹100 और ₹200 सिक्योरिटी डिपॉज़िट लेते हैं, जो टैग बंद करने पर वापस मिलता है। कुछ बैंक ₹100 से ₹150 न्यूनतम बैलेंस भी रखवाते हैं। रिचार्ज फ़ीस भुगतान के तरीके पर निर्भर है। हर प्रोवाइडर के लिए ऊपर तुलना तालिका देखें।' },
+    { q: 'कौन सा FASTag प्रोवाइडर सबसे अच्छा है?', a: `कारों के लिए शुल्क लगभग एक जैसे हैं: जारी करने के ${range(ISS[0], ISS[1], ' से ')}, ${range(DEP[0], DEP[1], ' से ')} वापसी योग्य डिपॉज़िट और ${range(MIN[0], MIN[1], ' से ')} तक न्यूनतम बैलेंस। आमतौर पर सबसे अच्छा वही बैंक है जिसे आप पहले से इस्तेमाल करते हैं, या जिसका रिचार्ज तरीका आपको सही लगे। हर FASTag हर टोल प्लाज़ा पर चलता है, और सालाना व लोकल पास किसी भी वैध FASTag पर काम करते हैं।` },
+    { q: 'FASTag के शुल्क क्या हैं?', a: `कार, जीप या वैन के लिए हमने जिन छह प्रोवाइडर को जाँचा, वे टैग जारी करने के ${range(ISS[0], ISS[1], ' से ')} और ${range(DEP[0], DEP[1], ' से ')} सिक्योरिटी डिपॉज़िट लेते हैं, जो टैग बंद करने पर वापस मिलता है। न्यूनतम बैलेंस ${range(MIN[0], MIN[1], ' से ')} तक है। रिचार्ज फ़ीस भुगतान के तरीके पर निर्भर है। हर प्रोवाइडर के लिए ऊपर तुलना तालिका देखें।` },
     { q: 'क्या एक गाड़ी पर कई FASTag हो सकते हैं?', a: 'नहीं। NHAI के “वन व्हीकल वन FASTag” नियम के तहत गाड़ी पर सिर्फ़ सबसे नया जारी FASTag चालू रहता है। पुराने टैग बंद या ब्लैकलिस्ट हो जाते हैं, इसलिए उन्हें जारी करने वाले बैंक को लौटा दें।', link: { href: 'https://nhai.gov.in/nhai/sites/default/files/2024-01/Press_Release-One_Vehical_One_FASTag_0.pdf', label: 'NHAI प्रेस रिलीज़' } },
     { q: 'मौजूदा FASTag कैसे बदलें?', a: 'अगर टैग ख़राब है या स्कैन नहीं होता, तो अपने बैंक से दोबारा जारी करने को कहें; कई बैंक ₹100 लेते हैं। बैंक बदलने के लिए पहले पुराना FASTag उसके बैंक से बंद कराएँ, फिर नया खरीदें, क्योंकि एक गाड़ी पर एक ही टैग चालू रह सकता है।' },
     { q: 'FASTag ब्लैकलिस्ट हो जाए तो क्या होगा?', a: 'टैग आमतौर पर कम बैलेंस, अधूरे KYC या गाड़ी की जानकारी में गड़बड़ी से ब्लैकलिस्ट होते हैं। 17 फ़रवरी 2025 से, अगर प्लाज़ा पहुँचने से 60 मिनट पहले से टैग ब्लैकलिस्ट है और स्कैन के 10 मिनट बाद तक रहता है, तो भुगतान अस्वीकार होता है और दोगुना टोल लगता है। रिचार्ज या बैंक से समस्या ठीक कराने पर यह हट जाता है। स्कैन के 10 मिनट के अंदर रिचार्ज करने पर सामान्य टोल लग सकता है।' },
-    { q: 'FASTag सालाना पास क्या है?', a: 'निजी कार, जीप और वैन के लिए पास, 2026-27 में ₹3,075 का। यह लगभग 1,150 नेशनल हाईवे और एक्सप्रेसवे प्लाज़ा पर 200 बार पार करने या एक साल, जो पहले पूरा हो, तक चलता है। इसे RajmargYatra ऐप या NHAI वेबसाइट पर खरीदें; यह लगभग दो घंटे में आपके मौजूदा FASTag पर चालू हो जाता है।' },
-    { q: 'FASTag लोकल पास क्या है?', a: '1 नवंबर 2026 से, नेशनल हाईवे टोल प्लाज़ा से 20 किमी के अंदर रहने वाले निजी गाड़ी मालिक उस एक प्लाज़ा के लिए सालाना पास ले सकते हैं: प्लाज़ा शहर की सीमा से बाहर हो तो ₹1,500, अंदर हो तो ₹3,000। यह एंट्री-एग्ज़िट टोल वाले एक्सप्रेसवे या मुफ़्त सर्विस रोड वाली जगह पर नहीं मिलता। आवेदन के समय NHAI आपका पता डिजिटल रूप से जाँचता है।', link: { href: 'https://rajmargyatra.nhai.gov.in/buy-fastag-local-pass', label: 'RajmargYatra लोकल पास पेज' } },
+    { q: 'FASTag सालाना पास क्या है?', a: `निजी कार, जीप और वैन के लिए पास, 2026-27 में ${A} का। यह लगभग 1,150 नेशनल हाईवे और एक्सप्रेसवे प्लाज़ा पर 200 बार पार करने या एक साल, जो पहले पूरा हो, तक चलता है। इसे RajmargYatra ऐप या NHAI वेबसाइट पर खरीदें; यह लगभग दो घंटे में आपके मौजूदा FASTag पर चालू हो जाता है।` },
+    { q: 'FASTag लोकल पास क्या है?', a: `1 नवंबर 2026 से, नेशनल हाईवे टोल प्लाज़ा से 20 किमी के अंदर रहने वाले निजी गाड़ी मालिक उस एक प्लाज़ा के लिए सालाना पास ले सकते हैं: प्लाज़ा शहर की सीमा से बाहर हो तो ${LO}, अंदर हो तो ${LI}। यह एंट्री-एग्ज़िट टोल वाले एक्सप्रेसवे या मुफ़्त सर्विस रोड वाली जगह पर नहीं मिलता। आवेदन के समय NHAI आपका पता डिजिटल रूप से जाँचता है।`, link: { href: 'https://rajmargyatra.nhai.gov.in/buy-fastag-local-pass', label: 'RajmargYatra लोकल पास पेज' } },
     { q: 'क्या FASTag ऑनलाइन रिचार्ज हो सकता है?', a: 'हाँ। अपने बैंक के ऐप या वेबसाइट, UPI ऐप, नेट बैंकिंग या कार्ड से रिचार्ज करें। फ़ीस बैंक और भुगतान के तरीके पर निर्भर है। उदाहरण के लिए, ICICI बैंक UPI रिचार्ज पर कुछ नहीं लेता, जबकि HDFC बैंक नेट बैंकिंग और क्रेडिट कार्ड रिचार्ज पर फ़ीस लेता है।' },
     { q: 'पुराना FASTag कैसे बंद करें?', a: 'जिस बैंक ने जारी किया, उससे कस्टमर केयर, ऐप या ब्रांच के ज़रिए FASTag खाता बंद करने को कहें और विंडस्क्रीन से स्टिकर हटा दें। बैंक की शर्तों के अनुसार बंद करने पर सिक्योरिटी डिपॉज़िट वापस मिलता है।' },
   ],
@@ -499,5 +514,4 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
 export const useI18n = () => useContext(I18n)
 
-export const inr = (n: number) =>
-  '₹' + (Number.isInteger(n) ? n.toLocaleString('en-IN') : n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))
+export { inr }

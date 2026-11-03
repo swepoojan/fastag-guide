@@ -5,7 +5,7 @@ import {
   Route, Smartphone, Sparkles, Tag, Truck, Wallet, Wrench, RefreshCw, CheckCircle2, CalendarDays, Sun, Plane,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { useI18n } from '../i18n'
+import { inr, useI18n } from '../i18n'
 import { providers, type ProviderId } from '../data/providers'
 import { PASS, type PlazaType } from '../lib/calc'
 import type { BankPref } from '../lib/recommend'
@@ -252,7 +252,7 @@ function StepBody({ step, a, set }: { step: StepId; a: Answers; set: Setter }) {
             <Seg label={w.dist} name="dist" value={a.dist} onChange={(v) => set('dist', v)} icon={MapPin}
               options={[{ v: 'yes', l: w.yes }, { v: 'no', l: w.no }, { v: 'unsure', l: w.unsure }]} />
             <Seg label={w.town} name="town" value={a.town} onChange={(v) => set('town', v)} icon={Landmark}
-              options={[{ v: 'outside', l: `${w.outside} · ₹1,500` }, { v: 'inside', l: `${w.inside} · ₹3,000` }, { v: 'unsure', l: w.unsure }]} />
+              options={[{ v: 'outside', l: `${w.outside} · ${inr(PASS.localOutside)}` }, { v: 'inside', l: `${w.inside} · ${inr(PASS.localInside)}` }, { v: 'unsure', l: w.unsure }]} />
             <div>
               <label htmlFor="toll" className="flex items-center gap-2 text-[15px] font-semibold"><Gauge size={17} className="text-ink-mute" /> {w.toll}</label>
               <div className="field mt-2 max-w-[220px]">

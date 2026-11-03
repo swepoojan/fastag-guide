@@ -31,7 +31,7 @@ export default function Passes() {
         <SectionHead eyebrow={p.eyebrow} title={p.h2} sub={p.sub} />
       </div>
       <div className="mt-5 flex flex-wrap items-center gap-3">
-        <Updated date={PASS.verifiedOn} label={p.asOf} tone="dark" />
+        <Updated date={PASS.verifiedOn} label={p.asOf} tone="dark" unverified={PASS.status === 'unverified'} />
         <span className="text-[13px] text-white/60">{p.source}</span>
       </div>
 

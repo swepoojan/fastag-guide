@@ -6,6 +6,7 @@ import { track } from '../lib/analytics'
 import { Reveal, Section, SectionHead } from './ui'
 import { ProviderLogo, fmtDate } from './Results'
 import Updated from './Updated'
+import { ChangeNotes, VerifyLine } from './Verify'
 
 type Filter = 'all' | 'low' | 'online' | 'upi' | 'bank'
 
@@ -47,6 +48,7 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
     { l: c.f_upi, v: (p) => yes(p.tags.includes('freeUpi'), lang) },
     { l: r.supportL, v: (p) => (p.support ? <span className="num select-all">{p.support}</span> : <span className="text-ink-mute">{r.supportNone}</span>) },
     { l: r.applyL, v: (p) => p.apply[lang] },
+    { l: r.lastChecked, v: (p) => <div className="grid gap-2"><VerifyLine p={p} compact /><ChangeNotes p={p} /></div> },
   ]
 
   const view = (p: Provider) => (

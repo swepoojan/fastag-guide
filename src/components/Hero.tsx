@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Landmark, ListChecks, ReceiptIndianRupee } from 'lucide-react'
 import { useI18n } from '../i18n'
 import { scrollToId } from './ui'
@@ -10,52 +9,46 @@ import { track } from '../lib/analytics'
 
 export default function Hero() {
   const { t } = useI18n()
-  const ease = [0.22, 1, 0.36, 1] as const
   return (
     <section id="top" className="gutter relative overflow-hidden pb-16 pt-8 sm:pb-24 sm:pt-14">
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[620px] bg-[radial-gradient(60%_55%_at_70%_20%,#d2f3e4_0%,rgba(255,255,255,0)_70%)]" />
       <div className="mx-auto grid max-w-page items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
         <div className="min-w-0">
-          <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-[13px] font-semibold text-brand-700 ring-1 ring-brand-200">
+          <p className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-[13px] font-semibold text-brand-700 ring-1 ring-brand-200">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-500" /> {t.hero.eyebrow}
-          </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05, ease }}
-            className="mt-6 text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] sm:text-[56px] lg:text-[54px] xl:text-[60px]">
+          </p>
+          <h1 className="mt-6 text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] sm:text-[56px] lg:text-[54px] xl:text-[60px]">
             {t.hero.h1a}
             <span className="block text-ink-mute">{t.hero.h1b}</span>
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.12, ease }}
-            className="lead mt-6 max-w-[34rem]">
+          </h1>
+          <p className="lead mt-6 max-w-[34rem]">
             {t.hero.sub}
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18, ease }}
-            className="mt-8 flex flex-wrap gap-3">
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
             <a href="#find" className="btn-primary group !px-6 !py-3.5"
               onClick={(e) => { e.preventDefault(); track('cta_clicked', { location: 'hero' }); scrollToId('find') }}>
-              {t.hero.cta} <ArrowRight size={18} className="transition group-hover:translate-x-0.5" />
+              {t.hero.cta} <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </a>
             <a href="#compare" className="btn-ghost !px-6 !py-3.5" onClick={(e) => { e.preventDefault(); scrollToId('compare') }}>
               {t.hero.cta2}
             </a>
-          </motion.div>
-          <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-[14.5px] text-ink-soft">
+          </div>
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-[14.5px] text-ink-soft">
             {[
               { i: ListChecks, l: t.hero.t1 },
               { i: ReceiptIndianRupee, l: t.hero.t2 },
               { i: Landmark, l: t.hero.t3 },
             ].map(({ i: Icon, l }) => (
-              <li key={l} className="flex items-center gap-2"><Icon size={17} className="text-brand-600" /> {l}</li>
+              <li key={l} className="flex items-center gap-2"><Icon size={17} className="text-brand-700" aria-hidden="true" /> {l}</li>
             ))}
-          </motion.ul>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.36 }} className="mt-5">
+          </ul>
+          <div className="mt-5">
             <Updated date={VERIFIED_ON} label={t.hero.updatedNote} />
-          </motion.div>
+          </div>
         </div>
-        <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.1, ease }} className="min-w-0">
+        <div className="min-w-0">
           <HeroArt />
-        </motion.div>
+        </div>
       </div>
     </section>
   )
@@ -122,7 +115,7 @@ function HeroArt() {
             <span className="text-[13px] text-ink-mute">{t.hero.artPerYear}</span>
           </div>
           <p className="mt-1.5 flex items-center gap-1.5 text-[13.5px] text-brand-700">
-            <CheckCircle2 size={15} /> {t.hero.artSave}
+            <CheckCircle2 size={15} aria-hidden="true" /> {t.hero.artSave}
           </p>
         </div>
       </div>

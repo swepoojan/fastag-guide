@@ -3,7 +3,7 @@ import { ArrowUpRight, Check, Scale } from 'lucide-react'
 import { inr, useI18n } from '../i18n'
 import { providers, providerLink, upfront, VERIFIED_ON, type Provider, type ProviderId } from '../data/providers'
 import { track } from '../lib/analytics'
-import { Reveal, Section, SectionHead } from './ui'
+import { Section, SectionHead, useMedia } from './ui'
 import { ProviderLogo, fmtDate } from './Results'
 import Updated from './Updated'
 import { ChangeNotes, VerifyLine } from './Verify'
@@ -23,6 +23,7 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
   const r = t.res
   const [filter, setFilter] = useState<Filter>('all')
   const [onlySelected, setOnlySelected] = useState(false)
+  const wide = useMedia('(min-width: 1024px)')
 
   const list = useMemo(() => {
     let l = [...providers]
@@ -55,14 +56,14 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
     <a href={providerLink(p)} target="_blank" rel={p.affiliateUrl ? 'sponsored noopener' : 'noopener'}
       onClick={() => track('provider_link_clicked', { provider: p.id, source: 'compare', affiliate: Boolean(p.affiliateUrl) })}
       className="btn-primary !px-4 !py-2 !text-[14px]">
-      {r.view} <ArrowUpRight size={15} />
+      {r.view} <ArrowUpRight size={15} aria-hidden="true" />
     </a>
   )
   const toggle = (p: Provider) => (
     <button type="button" aria-pressed={compareIds.includes(p.id)}
       onClick={() => { onToggleCompare(p.id); track('provider_compared', { provider: p.id, source: 'compare' }) }}
       className={`btn-ghost !px-3 !py-2 !text-[13.5px] ${compareIds.includes(p.id) ? '!bg-brand-50 !ring-brand-500' : ''}`}>
-      <Scale size={15} /> {compareIds.includes(p.id) ? r.compared : r.compare}
+      <Scale size={15} aria-hidden="true" /> {compareIds.includes(p.id) ? r.compared : r.compare}
     </button>
   )
 
@@ -70,7 +71,7 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
     <Section id="compare">
       <SectionHead eyebrow={c.eyebrow} title={c.h2} sub={c.sub} />
       <div className="mt-4"><Updated date={VERIFIED_ON} /></div>
-      <Reveal className="mt-6 flex flex-wrap items-center gap-2">
+      <div className="mt-6 flex flex-wrap items-center gap-2">
         {filters.map((f) => (
           <button key={f.id} type="button" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)} className={`chip ${filter === f.id ? 'chip-on' : ''}`}>
             {f.l}
@@ -81,7 +82,7 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
             <Scale size={15} /> {onlySelected ? c.clear : `${c.selected} (${compareIds.length})`}
           </button>
         )}
-      </Reveal>
+      </div>
       {filter === 'bank' && (
         <div className="mt-4">
           <label htmlFor="cmp-bank" className="text-[14px] font-medium text-ink-soft">{c.pickBank}</label>
@@ -97,8 +98,8 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
         <p className="card mt-6 p-10 text-center text-ink-mute">{c.empty}</p>
       ) : (
         <>
-          {/* Desktop table */}
-          <Reveal className="mt-6 hidden overflow-x-auto rounded-3xl ring-1 ring-line lg:block">
+          {wide ? (
+          <div className="mt-6 overflow-x-auto rounded-3xl ring-1 ring-line">
             <table className="w-full min-w-[960px] border-collapse text-left text-[14px]">
               <thead>
                 <tr className="bg-paper">
@@ -121,7 +122,7 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
                   </tr>
                 ))}
                 <tr className="border-t border-line">
-                  <th scope="row" className="sticky left-0 bg-white p-4" />
+                  <td className="sticky left-0 bg-white p-4" />
                   {list.map((p) => (
                     <td key={p.id} className="p-4">
                       <div className="flex flex-col items-start gap-2">{view(p)}{toggle(p)}</div>
@@ -130,10 +131,9 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
                 </tr>
               </tbody>
             </table>
-          </Reveal>
-
-          {/* Mobile cards */}
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:hidden">
+          </div>
+          ) : (
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {list.map((p) => (
               <article key={p.id} className={`card p-5 ${p.id === myBank && filter === 'bank' ? '!ring-2 !ring-brand-500' : ''}`}>
                 <div className="flex items-center gap-3">
@@ -152,6 +152,7 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
               </article>
             ))}
           </div>
+          )}
         </>
       )}
       <p className="mt-5 max-w-3xl text-[13.5px] text-ink-mute">

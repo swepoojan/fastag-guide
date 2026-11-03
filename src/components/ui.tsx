@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 
 export function Section({ id, children, className = '' }: { id?: string; children: ReactNode; className?: string }) {
   return (
@@ -9,27 +8,13 @@ export function Section({ id, children, className = '' }: { id?: string; childre
   )
 }
 
-export function Reveal({ children, delay = 0, className = '' }: { children: ReactNode; delay?: number; className?: string }) {
-  return (
-    <motion.div
-      className={className}
-      initial={{ y: 14 }}
-      whileInView={{ y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
 export function SectionHead({ eyebrow, title, sub, center = false }: { eyebrow: string; title: string; sub?: string; center?: boolean }) {
   return (
-    <Reveal className={`max-w-2xl ${center ? 'mx-auto text-center' : ''}`}>
+    <div className={`max-w-2xl ${center ? 'mx-auto text-center' : ''}`}>
       <p className="eyebrow">{eyebrow}</p>
       <h2 className="h2 mt-3">{title}</h2>
       {sub && <p className="lead mt-4">{sub}</p>}
-    </Reveal>
+    </div>
   )
 }
 
@@ -49,4 +34,17 @@ export function scrollToId(id: string) {
   if (!el) return
   el.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
   history.replaceState(null, '', '#' + id)
+}
+
+/** True when the media query matches. Starts true so the prerendered HTML uses the wide layout. */
+export function useMedia(query: string) {
+  const [matches, setMatches] = useState(true)
+  useEffect(() => {
+    const mq = window.matchMedia(query)
+    const update = () => setMatches(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [query])
+  return matches
 }

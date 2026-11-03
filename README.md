@@ -1,6 +1,6 @@
 # FASTAG GUIDE
 
-Find the right FASTag and the cheapest toll pass for your trips. Live at **https://fastag-guide.vercel.app**
+Find the right FASTag and the cheapest toll pass for your trips. A free tool by Technokari, live at **https://fastag.tools.technokari.com**
 
 A single-page site for Indian vehicle owners that:
 
@@ -10,7 +10,7 @@ A single-page site for Indian vehicle owners that:
 
 ## Stack
 
-React 18, TypeScript, Tailwind CSS, Framer Motion, Lucide icons, Vite. Tests with Vitest.
+React 18, TypeScript, Tailwind CSS, Lucide icons, Vite. Tests with Vitest. The page is prerendered to static HTML at build time (so search engines and AI crawlers see the full content) and hydrated in the browser.
 
 ## Develop
 
@@ -18,8 +18,18 @@ React 18, TypeScript, Tailwind CSS, Framer Motion, Lucide icons, Vite. Tests wit
 npm install
 npm run dev     # local dev server
 npm test        # cost and recommendation logic tests
-npm run build   # builds the share image, type-checks and bundles to dist/
+npm run build   # share image, type-check, bundle, prerender to HTML, robots/sitemap/llms.txt → dist/
 ```
+
+## Site address (one place)
+
+The public address is set once, in `.env`:
+
+```
+VITE_SITE_URL=https://fastag.tools.technokari.com
+```
+
+Canonical link, Open Graph and Twitter tags, structured data, `robots.txt`, `sitemap.xml` and `llms.txt` all read it at build time. To move the site, change this line (or set `VITE_SITE_URL` in Vercel → Project → Settings → Environment Variables, which overrides `.env`), add the new domain in Vercel, and redeploy.
 
 ## Where to change things
 
@@ -31,7 +41,8 @@ npm run build   # builds the share image, type-checks and bundles to dist/
 | Cost comparison logic | `src/lib/calc.ts` |
 | Provider picks | `src/lib/recommend.ts` |
 | All text, FAQs and legal copy (English + Hindi) | `src/i18n.tsx` |
-| Brand name, contact email, official links | `src/config.ts` |
+| Brand name, publisher, contact email, official links | `src/config.ts` |
+| Security headers and caching | `vercel.json` |
 | Analytics events and sinks | `src/lib/analytics.ts` |
 
 Set a provider's `affiliateUrl` only once you have an approved affiliate or referral link; until then the "View provider" button uses the verified official page. Picks never depend on commission.

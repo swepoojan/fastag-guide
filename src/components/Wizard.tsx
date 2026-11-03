@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import {
-  ArrowLeft, ArrowRight, Bus, Building2, Car, CircleHelp, Gauge, Landmark, Loader2, MapPin,
+  ArrowLeft, ArrowRight, Bus, Building2, Car, CircleHelp, Gauge, Landmark, MapPin,
   Route, Smartphone, Sparkles, Tag, Truck, Wallet, Wrench, RefreshCw, CheckCircle2, CalendarDays, Sun, Plane,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -79,8 +78,7 @@ export default function Wizard({ compareIds, onToggleCompare, onBankChange }: Pr
   const w = t.wiz
   const [a, setA] = useState<Answers>(initial)
   const [i, setI] = useState(0)
-  const [dir, setDir] = useState(1)
-  const [phase, setPhase] = useState<'ask' | 'loading' | 'done'>('ask')
+  const [phase, setPhase] = useState<'ask' | 'done'>('ask')
   const [error, setError] = useState('')
   const started = useRef(false)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -117,26 +115,29 @@ export default function Wizard({ compareIds, onToggleCompare, onBankChange }: Pr
     }
   }
 
-  const focusCard = () => requestAnimationFrame(() => cardRef.current?.querySelector<HTMLElement>('h3')?.focus())
+  const focusCard = () => requestAnimationFrame(() => cardRef.current?.querySelector<HTMLElement>('legend')?.focus())
 
   const next = () => {
     const err = valid()
     if (err) { setError(err); return }
     if (last) {
-      setPhase('loading')
       track('wizard_completed', { vehicle: a.vehicle!, status: a.status! })
-      window.setTimeout(() => { setPhase('done'); requestAnimationFrame(() => scrollToId('find')) }, 650)
+      setPhase('done')
+      requestAnimationFrame(() => {
+        scrollToId('find')
+        document.getElementById('results-heading')?.focus({ preventScroll: true })
+      })
       return
     }
-    setDir(1); setI((x) => x + 1); focusCard()
+    setI((x) => x + 1); focusCard()
   }
-  const back = () => { setError(''); setDir(-1); setI((x) => Math.max(0, x - 1)); focusCard() }
+  const back = () => { setError(''); setI((x) => Math.max(0, x - 1)); focusCard() }
 
   useEffect(() => {
     onBankChange(a.bank && a.bank !== 'other' ? a.bank : null)
   }, [a.bank, onBankChange])
 
-  const edit = () => { setPhase('ask'); setI(0); setDir(-1) }
+  const edit = () => { setPhase('ask'); setI(0); focusCard() }
   const restart = () => { setA(initial); setPhase('ask'); setI(0); started.current = false }
 
   return (
@@ -144,37 +145,23 @@ export default function Wizard({ compareIds, onToggleCompare, onBankChange }: Pr
       <SectionHead eyebrow={w.eyebrow} title={w.h2} sub={w.sub} />
       <div className="mt-10" ref={cardRef}>
         {phase === 'ask' && (
-          <div className="card mx-auto max-w-3xl overflow-hidden">
+          <form className="card mx-auto max-w-3xl overflow-hidden" noValidate onSubmit={(e) => { e.preventDefault(); next() }}>
             <Progress i={i} n={steps.length} label={`${w.step} ${i + 1} ${w.of} ${steps.length}`} />
             <div className="p-5 sm:p-10">
-              <AnimatePresence mode="wait" custom={dir} initial={false}>
-                <motion.div
-                  key={step}
-                  custom={dir}
-                  initial={{ opacity: 0, x: dir * 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: dir * -24 }}
-                  transition={{ duration: 0.22, ease: 'easeOut' }}
-                >
-                  <StepBody step={step} a={a} set={set} />
-                </motion.div>
-              </AnimatePresence>
+              <div key={step} className="animate-fade-up">
+                <StepBody step={step} a={a} set={set} />
+              </div>
               <p role="alert" className="mt-4 min-h-[1.5em] text-[14.5px] font-medium text-[#b4232a]">{error}</p>
               <div className="mt-2 flex items-center justify-between gap-3">
-                <button type="button" onClick={back} disabled={i === 0} className="btn-ghost">
-                  <ArrowLeft size={17} /> {w.back}
+                <button type="button" onClick={back} disabled={i === 0} className="btn-ghost !px-4 sm:!px-5">
+                  <ArrowLeft size={17} aria-hidden="true" /> {w.back}
                 </button>
-                <button type="button" onClick={next} className="btn-brand !px-6">
-                  {last ? w.see : w.next} <ArrowRight size={17} />
+                <button type="submit" className="btn-brand !px-5 sm:!px-6">
+                  {last ? w.see : w.next} <ArrowRight size={17} aria-hidden="true" />
                 </button>
               </div>
             </div>
-          </div>
-        )}
-        {phase === 'loading' && (
-          <div className="card mx-auto flex max-w-3xl items-center justify-center gap-3 p-16 text-ink-soft" role="status">
-            <Loader2 className="animate-spin text-brand-600" size={22} /> {t.res.loading}
-          </div>
+          </form>
         )}
         {phase === 'done' && (
           <Results a={a} onEdit={edit} onRestart={restart} compareIds={compareIds} onToggleCompare={onToggleCompare} />
@@ -187,13 +174,11 @@ export default function Wizard({ compareIds, onToggleCompare, onBankChange }: Pr
 function Progress({ i, n, label }: { i: number; n: number; label: string }) {
   return (
     <div className="border-b border-line px-5 py-4 sm:px-10">
-      <div className="flex items-center justify-between text-[13px] font-medium text-ink-mute">
-        <span>{label}</span>
-      </div>
+      <p className="text-[13px] font-medium text-ink-mute" aria-live="polite">{label}</p>
       <div className="mt-2.5 flex gap-1.5" aria-hidden="true">
         {Array.from({ length: n }).map((_, k) => (
           <div key={k} className="h-1.5 flex-1 overflow-hidden rounded-full bg-line">
-            <motion.div className="h-full rounded-full bg-brand-500" initial={false} animate={{ width: k <= i ? '100%' : '0%' }} transition={{ duration: 0.35 }} />
+            <div className={`h-full rounded-full bg-brand-500 transition-[width] duration-300 ${k <= i ? 'w-full' : 'w-0'}`} />
           </div>
         ))}
       </div>
@@ -254,7 +239,7 @@ function StepBody({ step, a, set }: { step: StepId; a: Answers; set: Setter }) {
             <Seg label={w.town} name="town" value={a.town} onChange={(v) => set('town', v)} icon={Landmark}
               options={[{ v: 'outside', l: `${w.outside} · ${inr(PASS.localOutside)}` }, { v: 'inside', l: `${w.inside} · ${inr(PASS.localInside)}` }, { v: 'unsure', l: w.unsure }]} />
             <div>
-              <label htmlFor="toll" className="flex items-center gap-2 text-[15px] font-semibold"><Gauge size={17} className="text-ink-mute" /> {w.toll}</label>
+              <label htmlFor="toll" className="flex items-center gap-2 text-[15px] font-semibold"><Gauge size={17} className="text-ink-mute" aria-hidden="true" /> {w.toll}</label>
               <div className="field mt-2 max-w-[220px]">
                 <span className="pl-4 font-mono text-ink-mute">₹</span>
                 <input id="toll" type="number" inputMode="numeric" min={0} max={2000} value={a.toll} onChange={(e) => set('toll', e.target.value)} />
@@ -305,17 +290,14 @@ function StepBody({ step, a, set }: { step: StepId; a: Answers; set: Setter }) {
             { v: 'lowest', l: w.b_lowest, d: w.b_lowest_d, i: Wallet },
           ]} />
           {(a.pref === 'existing' || a.bank) && (
-            <div className="mt-6">
-              <p id="bank-l" className="text-[15px] font-semibold">{w.whichBank}</p>
-              <div className="mt-3 flex flex-wrap gap-2" role="radiogroup" aria-labelledby="bank-l">
+            <fieldset className="mt-6 min-w-0">
+              <legend className="text-[15px] font-semibold">{w.whichBank}</legend>
+              <div className="mt-3 flex flex-wrap gap-2">
                 {[...providers.map((p) => ({ v: p.id as ProviderId | 'other', l: p.name })), { v: 'other' as const, l: w.otherBank }].map((o) => (
-                  <button key={o.v} type="button" role="radio" aria-checked={a.bank === o.v}
-                    onClick={() => set('bank', o.v)} className={`chip ${a.bank === o.v ? 'chip-on' : ''}`}>
-                    {o.l}
-                  </button>
+                  <Chip key={o.v} name="bank" value={o.v} label={o.l} checked={a.bank === o.v} onChange={() => set('bank', o.v)} />
                 ))}
               </div>
-            </div>
+            </fieldset>
           )}
         </Q>
       )
@@ -324,9 +306,8 @@ function StepBody({ step, a, set }: { step: StepId; a: Answers; set: Setter }) {
 
 function Q({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
-    <fieldset>
-      <legend className="sr-only">{title}</legend>
-      <h3 tabIndex={-1} className="text-[22px] font-semibold leading-snug tracking-tight outline-none sm:text-[26px]">{title}</h3>
+    <fieldset className="min-w-0">
+      <legend tabIndex={-1} className="text-[22px] font-semibold leading-snug tracking-tight outline-none sm:text-[26px]">{title}</legend>
       {hint && <p className="mt-2 text-[15px] text-ink-mute">{hint}</p>}
       <div className="mt-6">{children}</div>
     </fieldset>
@@ -337,21 +318,22 @@ interface Opt<T> { v: T; l: string; d?: string; i: LucideIcon }
 
 function Choices<T extends string>({ value, onChange, options, name }: { value: T | null; onChange: (v: T) => void; options: Opt<T>[]; name: string }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label={name}>
+    <div className="grid gap-3 sm:grid-cols-2">
       {options.map(({ v, l, d, i: Icon }) => {
         const on = value === v
         return (
-          <button key={v} type="button" role="radio" aria-checked={on} onClick={() => onChange(v)}
-            className={`group flex items-center gap-4 rounded-2xl p-4 text-left ring-1 transition-all duration-200 ${on ? 'bg-brand-50 ring-2 ring-brand-500' : 'bg-white ring-line hover:-translate-y-0.5 hover:ring-ink/25 hover:shadow-soft'}`}>
-            <span className={`grid h-11 w-11 flex-none place-items-center rounded-xl transition ${on ? 'bg-brand-600 text-white' : 'bg-paper text-ink-soft group-hover:text-ink'}`}>
+          <label key={v}
+            className={`group flex cursor-pointer items-center gap-4 rounded-2xl p-4 ring-1 transition-[box-shadow,background-color,transform] duration-200 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand-500 ${on ? 'bg-brand-50 ring-2 ring-brand-500' : 'bg-white ring-line hover:-translate-y-0.5 hover:shadow-soft hover:ring-ink/25'}`}>
+            <input type="radio" name={name} value={v} checked={on} onChange={() => onChange(v)} className="sr-only" />
+            <span aria-hidden="true" className={`grid h-11 w-11 flex-none place-items-center rounded-xl transition-colors ${on ? 'bg-brand-600 text-white' : 'bg-paper text-ink-soft group-hover:text-ink'}`}>
               <Icon size={21} />
             </span>
             <span className="min-w-0">
               <span className="block text-[16px] font-semibold">{l}</span>
               {d && <span className="mt-0.5 block text-[13.5px] text-ink-mute">{d}</span>}
             </span>
-            <span aria-hidden="true" className={`ml-auto h-5 w-5 flex-none rounded-full ring-2 transition ${on ? 'bg-brand-600 ring-brand-600 shadow-[inset_0_0_0_3px_#fff]' : 'ring-line'}`} />
-          </button>
+            <span aria-hidden="true" className={`ml-auto h-5 w-5 flex-none rounded-full ring-2 transition-colors ${on ? 'bg-brand-600 ring-brand-600 shadow-[inset_0_0_0_3px_#fff]' : 'ring-line'}`} />
+          </label>
         )
       })}
     </div>
@@ -359,19 +341,21 @@ function Choices<T extends string>({ value, onChange, options, name }: { value: 
 }
 
 function Seg<T extends string>({ label, name, value, onChange, options, icon: Icon }: { label: string; name: string; value: T | null; onChange: (v: T) => void; options: { v: T; l: string }[]; icon: LucideIcon }) {
-  const id = `seg-${name}`
   return (
-    <div>
-      <p id={id} className="flex items-center gap-2 text-[15px] font-semibold"><Icon size={17} className="text-ink-mute" /> {label}</p>
-      <div className="mt-2.5 flex flex-wrap gap-2" role="radiogroup" aria-labelledby={id}>
-        {options.map((o) => (
-          <button key={o.v} type="button" role="radio" aria-checked={value === o.v} onClick={() => onChange(o.v)}
-            className={`chip !py-2.5 ${value === o.v ? 'chip-on' : ''}`}>
-            {o.l}
-          </button>
-        ))}
+    <fieldset className="min-w-0">
+      <legend className="flex items-center gap-2 text-[15px] font-semibold"><Icon size={17} className="text-ink-mute" aria-hidden="true" /> {label}</legend>
+      <div className="mt-2.5 flex flex-wrap gap-2">
+        {options.map((o) => <Chip key={o.v} name={name} value={o.v} label={o.l} checked={value === o.v} onChange={() => onChange(o.v)} />)}
       </div>
-    </div>
+    </fieldset>
   )
 }
 
+function Chip({ name, value, label, checked, onChange }: { name: string; value: string; label: string; checked: boolean; onChange: () => void }) {
+  return (
+    <label className={`chip min-h-[44px] cursor-pointer has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand-500 ${checked ? 'chip-on' : ''}`}>
+      <input type="radio" name={name} value={value} checked={checked} onChange={onChange} className="sr-only" />
+      {label}
+    </label>
+  )
+}

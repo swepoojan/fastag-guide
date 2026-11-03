@@ -4,7 +4,10 @@
 
 @layer base {
   html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+  }
   body { @apply bg-white text-ink antialiased; font-feature-settings: 'ss01'; }
   h1, h2, h3 { text-wrap: balance; }
   :focus-visible { outline: 2px solid #10a36b; outline-offset: 2px; }

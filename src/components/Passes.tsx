@@ -6,7 +6,7 @@ import { annualBreakEven, PASS } from '../lib/calc'
 import Updated from './Updated'
 import { track } from '../lib/analytics'
 import { site } from '../config'
-import { Reveal, Section, SectionHead } from './ui'
+import { Section, SectionHead } from './ui'
 
 export default function Passes() {
   const { t } = useI18n()
@@ -40,7 +40,7 @@ export default function Passes() {
         <PassBlock icon={MapPin} title={p.localH} price={p.localPrice} items={[p.l1, p.l2, p.l3, p.l4]} accent />
       </div>
 
-      <Reveal className="mt-5 grid gap-6 rounded-3xl bg-white p-6 text-ink sm:p-8 lg:grid-cols-[1fr_1fr] lg:gap-10">
+      <div className="mt-5 grid grid-cols-[minmax(0,1fr)] gap-6 rounded-3xl bg-white p-5 text-ink sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
         <div>
           <h3 className="text-[22px] font-semibold tracking-tight">{p.calcH}</h3>
           <p className="mt-2 text-[15px] text-ink-mute">{p.calcSub}</p>
@@ -79,29 +79,29 @@ export default function Passes() {
             </>
           ) : <p className="text-ink-mute">—</p>}
           <div className="mt-6 flex flex-wrap gap-2">
-            <a href={site.official.rajmargYatra} target="_blank" rel="noopener" className="btn-primary !py-2.5">{p.ctaAnnual} <ArrowUpRight size={16} /></a>
-            <a href={site.official.rajmargYatraLocalPass} target="_blank" rel="noopener" className="btn-ghost !py-2.5">{p.ctaLocal} <ArrowUpRight size={16} /></a>
+            <a href={site.official.rajmargYatra} target="_blank" rel="noopener" className="btn-primary !whitespace-normal !py-2.5 text-left">{p.ctaAnnual} <ArrowUpRight size={16} aria-hidden="true" /></a>
+            <a href={site.official.rajmargYatraLocalPass} target="_blank" rel="noopener" className="btn-ghost !whitespace-normal !py-2.5 text-left">{p.ctaLocal} <ArrowUpRight size={16} aria-hidden="true" /></a>
           </div>
         </div>
-      </Reveal>
+      </div>
     </Section>
   )
 }
 
 function PassBlock({ icon: Icon, title, price, items, accent = false }: { icon: LucideIcon; title: string; price: string; items: string[]; accent?: boolean }) {
   return (
-    <Reveal className={`rounded-3xl p-6 ring-1 sm:p-8 ${accent ? 'bg-brand-900/60 ring-brand-500/40' : 'bg-white/5 ring-white/10'}`}>
+    <div className={`rounded-3xl p-6 ring-1 sm:p-8 ${accent ? 'bg-brand-900/60 ring-brand-500/40' : 'bg-white/5 ring-white/10'}`}>
       <div className="flex items-center gap-3">
-        <span className={`grid h-11 w-11 place-items-center rounded-xl ${accent ? 'bg-brand-500 text-white' : 'bg-white/10 text-white'}`}><Icon size={21} /></span>
+        <span className={`grid h-11 w-11 place-items-center rounded-xl ${accent ? 'bg-brand-500 text-white' : 'bg-white/10 text-white'}`}><Icon size={21} aria-hidden="true" /></span>
         <div>
           <h3 className="text-[19px] font-semibold">{title}</h3>
           <p className="num text-[15px] text-brand-200">{price}</p>
         </div>
       </div>
       <ul className="mt-6 grid gap-3 text-[15px] text-white/80">
-        {items.map((x) => <li key={x} className="flex gap-3"><Check size={18} className="mt-0.5 flex-none text-brand-200" /> {x}</li>)}
+        {items.map((x) => <li key={x} className="flex gap-3"><Check size={18} aria-hidden="true" className="mt-0.5 flex-none text-brand-200" /> {x}</li>)}
       </ul>
-    </Reveal>
+    </div>
   )
 }
 

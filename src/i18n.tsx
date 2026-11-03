@@ -33,7 +33,7 @@ const en = {
   wiz: {
     eyebrow: 'Recommendation assistant',
     h2: 'Answer a few questions. Get your best option.',
-    sub: 'We only ask about your vehicle and trips. No Aadhaar, PAN, vehicle number or bank details.',
+    sub: 'Six quick questions about your vehicle and trips, about a minute. We never ask for Aadhaar, PAN, your vehicle number or bank details.',
     step: 'Step',
     of: 'of',
     back: 'Back',
@@ -89,7 +89,6 @@ const en = {
   },
   res: {
     h2: 'Your options',
-    loading: 'Working out your options…',
     yourPass: 'Toll pass for your trips',
     cheapest: 'Cheapest for you',
     perYear: 'a year',
@@ -194,20 +193,16 @@ const en = {
     asOf: 'Prices as of',
     source: 'Source: NHAI / MoRTH announcements',
   },
-  how: {
+  method: {
     eyebrow: 'How it works',
-    h2: 'Three steps. About a minute.',
-    s1: 'Tell us about your vehicle', s1d: 'Vehicle type and how often you cross toll plazas.',
-    s2: 'Compare your options', s2d: 'Toll passes and FASTag providers, worked out for you.',
-    s3: 'Choose and apply', s3d: 'Go straight to the official page of your choice.',
-  },
-  why: {
-    eyebrow: `Why ${'FASTAG GUIDE'}`,
-    h2: 'Built to make one decision easier',
-    c1: 'Simplified comparison', c1d: 'No need to visit six bank websites. The key charges are in one place.',
-    c2: 'Transparent pricing', c2d: 'Every figure comes from the provider’s official page, with the date we checked it.',
-    c3: 'Personalised results', c3d: 'Based on your vehicle and trips, including the new local pass.',
-    c4: 'Independent guidance', c4d: 'Clear disclosures. We are not NHAI, IHMCL or a bank.',
+    h2: 'How we get our numbers',
+    sub: 'Every fee and pass price on this page comes from an official source, and a robot re-checks them every day.',
+    m1: 'Official sources only', m1d: 'Bank fees come from each bank’s own FASTag fees page. Pass prices come from NHAI and MoRTH announcements.',
+    m2: 'Checked every day', m2d: 'Each page is read twice. A new figure goes live only after it shows up on two checks in a row, so a glitch on a bank’s website can’t change our numbers.',
+    m3: 'Clear when we can’t confirm', m3d: 'If a page can’t be read for two days, that provider shows “Couldn’t verify since” with the last date we confirmed it.',
+    m4: 'Commission never changes results', m4d: 'Picks are based on your answers and published fees. When a link is an affiliate link, the disclosure says so.',
+    sourcesH: 'Sources we check',
+    nhai: 'NHAI RajmargYatra (toll passes)',
   },
   faq: { eyebrow: 'FAQs', h2: 'Common FASTag questions' },
   final: {
@@ -222,6 +217,7 @@ const en = {
     updated: 'Charges last checked',
     closeD: 'Close',
     lang: 'Language',
+    by: 'A free tool by',
   },
 }
 
@@ -251,7 +247,7 @@ const hi: Dict = {
   wiz: {
     eyebrow: 'सुझाव सहायक',
     h2: 'कुछ सवालों के जवाब दें। अपना सबसे अच्छा विकल्प पाएँ।',
-    sub: 'हम सिर्फ़ आपकी गाड़ी और यात्राओं के बारे में पूछते हैं। आधार, PAN, गाड़ी नंबर या बैंक जानकारी नहीं।',
+    sub: 'आपकी गाड़ी और यात्राओं के बारे में छह छोटे सवाल, लगभग एक मिनट। हम आधार, PAN, गाड़ी नंबर या बैंक जानकारी कभी नहीं माँगते।',
     step: 'कदम',
     of: '/',
     back: 'पीछे',
@@ -307,7 +303,6 @@ const hi: Dict = {
   },
   res: {
     h2: 'आपके विकल्प',
-    loading: 'आपके विकल्प निकाले जा रहे हैं…',
     yourPass: 'आपकी यात्राओं के लिए टोल पास',
     cheapest: 'आपके लिए सबसे सस्ता',
     perYear: 'प्रति वर्ष',
@@ -412,20 +407,16 @@ const hi: Dict = {
     asOf: 'कीमतें इस तारीख तक',
     source: 'स्रोत: NHAI / MoRTH घोषणाएँ',
   },
-  how: {
+  method: {
     eyebrow: 'कैसे काम करता है',
-    h2: 'तीन कदम। लगभग एक मिनट।',
-    s1: 'अपनी गाड़ी के बारे में बताएँ', s1d: 'गाड़ी का प्रकार और आप कितनी बार टोल पार करते हैं।',
-    s2: 'अपने विकल्पों की तुलना करें', s2d: 'टोल पास और FASTag प्रोवाइडर, आपके लिए निकाले गए।',
-    s3: 'चुनें और आवेदन करें', s3d: 'सीधे अपनी पसंद के आधिकारिक पेज पर जाएँ।',
-  },
-  why: {
-    eyebrow: 'FASTAG GUIDE क्यों',
-    h2: 'एक फ़ैसले को आसान बनाने के लिए',
-    c1: 'आसान तुलना', c1d: 'छह बैंक वेबसाइट पर जाने की ज़रूरत नहीं। ज़रूरी शुल्क एक ही जगह।',
-    c2: 'साफ़ शुल्क', c2d: 'हर आँकड़ा प्रोवाइडर के आधिकारिक पेज से, जाँच की तारीख के साथ।',
-    c3: 'आपके हिसाब से नतीजे', c3d: 'आपकी गाड़ी और यात्राओं पर आधारित, नए लोकल पास सहित।',
-    c4: 'स्वतंत्र मार्गदर्शन', c4d: 'साफ़ जानकारी। हम NHAI, IHMCL या कोई बैंक नहीं हैं।',
+    h2: 'हमारे आँकड़े कहाँ से आते हैं',
+    sub: 'इस पेज की हर फ़ीस और पास की कीमत आधिकारिक स्रोत से है, और एक रोबोट रोज़ इन्हें दोबारा जाँचता है।',
+    m1: 'सिर्फ़ आधिकारिक स्रोत', m1d: 'बैंक फ़ीस हर बैंक के अपने FASTag फ़ीस पेज से। पास की कीमतें NHAI और MoRTH की घोषणाओं से।',
+    m2: 'रोज़ जाँच', m2d: 'हर पेज दो बार पढ़ा जाता है। नया आँकड़ा तभी लाइव होता है जब वह लगातार दो जाँचों में दिखे, ताकि बैंक वेबसाइट की कोई गड़बड़ी हमारे आँकड़े न बदले।',
+    m3: 'पुष्टि न हो तो साफ़ बताते हैं', m3d: 'अगर कोई पेज दो दिन तक नहीं पढ़ा जा सके, तो उस प्रोवाइडर पर “इस तारीख के बाद जाँच नहीं हो पाई” के साथ आख़िरी पुष्टि की तारीख दिखती है।',
+    m4: 'कमीशन से नतीजे नहीं बदलते', m4d: 'सुझाव आपके जवाबों और प्रकाशित फ़ीस पर आधारित हैं। एफ़िलिएट लिंक होने पर यह साफ़ बताया जाता है।',
+    sourcesH: 'हम ये स्रोत जाँचते हैं',
+    nhai: 'NHAI RajmargYatra (टोल पास)',
   },
   faq: { eyebrow: 'सवाल-जवाब', h2: 'FASTag से जुड़े आम सवाल' },
   final: {
@@ -440,6 +431,7 @@ const hi: Dict = {
     updated: 'शुल्क आख़िरी बार जाँचे गए',
     closeD: 'बंद करें',
     lang: 'भाषा',
+    by: 'एक मुफ़्त टूल, द्वारा',
   },
 }
 
@@ -476,14 +468,14 @@ export const faqs: Record<Lang, Faq[]> = {
 
 export const legal: Record<Lang, Record<'about' | 'privacy' | 'terms' | 'affiliate' | 'disclaimer', string[]>> = {
   en: {
-    about: ['FASTAG GUIDE helps Indian vehicle owners choose a FASTag provider and the right toll pass for how they actually drive.', 'Charges are read from each provider’s official page and dated. When something changes, we update it in one place for every visitor.'],
+    about: ['FASTAG GUIDE is a free tool by Technokari. It helps Indian vehicle owners choose a FASTag provider and the right toll pass for how they actually drive.', 'Charges are read from each provider’s official page and dated. When something changes, we update it in one place for every visitor.'],
     privacy: ['The recommendation assistant runs entirely in your browser. We do not ask for Aadhaar, PAN, vehicle number or bank details, and your answers are not stored on our servers.', 'We may count anonymous events such as “assistant completed” or “provider link clicked” to improve the site. These never include personal information.'],
     terms: ['The information on this site is general guidance, not financial or legal advice. Toll pass eligibility is decided by NHAI and FASTag issuance by the provider.', 'Links take you to third-party websites whose terms apply once you leave this site.'],
     affiliate: ['Some links may be affiliate or referral links. We may earn a commission if you apply through them, at no additional cost to you.', 'Recommendations are based on your answers and published charges. Commission never changes the order of results.'],
     disclaimer: ['FASTAG GUIDE is an independent informational and comparison platform. We are not NHAI, IHMCL or a FASTag issuing bank. FASTag issuance and activation are handled by authorised providers. Provider details, charges and eligibility are subject to change. Please verify information with the respective provider before applying.'],
   },
   hi: {
-    about: ['FASTAG GUIDE भारतीय गाड़ी मालिकों को FASTag प्रोवाइडर और उनकी असली यात्रा के हिसाब से सही टोल पास चुनने में मदद करता है।', 'शुल्क हर प्रोवाइडर के आधिकारिक पेज से तारीख के साथ लिए जाते हैं। कुछ बदलने पर हम उसे एक ही जगह सबके लिए अपडेट करते हैं।'],
+    about: ['FASTAG GUIDE, Technokari का एक मुफ़्त टूल है। यह भारतीय गाड़ी मालिकों को FASTag प्रोवाइडर और उनकी असली यात्रा के हिसाब से सही टोल पास चुनने में मदद करता है।', 'शुल्क हर प्रोवाइडर के आधिकारिक पेज से तारीख के साथ लिए जाते हैं। कुछ बदलने पर हम उसे एक ही जगह सबके लिए अपडेट करते हैं।'],
     privacy: ['सुझाव सहायक पूरी तरह आपके ब्राउज़र में चलता है। हम आधार, PAN, गाड़ी नंबर या बैंक जानकारी नहीं माँगते, और आपके जवाब हमारे सर्वर पर सेव नहीं होते।', 'साइट बेहतर बनाने के लिए हम “सहायक पूरा हुआ” या “प्रोवाइडर लिंक क्लिक हुआ” जैसे गुमनाम इवेंट गिन सकते हैं। इनमें कभी निजी जानकारी नहीं होती।'],
     terms: ['इस साइट की जानकारी सामान्य मार्गदर्शन है, वित्तीय या कानूनी सलाह नहीं। टोल पास की पात्रता NHAI और FASTag जारी करना प्रोवाइडर तय करता है।', 'लिंक आपको दूसरी वेबसाइट पर ले जाते हैं, जहाँ उनकी शर्तें लागू होती हैं।'],
     affiliate: ['कुछ लिंक एफ़िलिएट या रेफ़रल लिंक हो सकते हैं। उनके ज़रिए आवेदन करने पर हमें कमीशन मिल सकता है, आपको कोई अतिरिक्त खर्च नहीं।', 'सुझाव आपके जवाबों और प्रकाशित शुल्क पर आधारित हैं। कमीशन से नतीजों का क्रम कभी नहीं बदलता।'],
@@ -497,14 +489,16 @@ interface Ctx { lang: Lang; t: Dict; setLang: (l: Lang) => void }
 const I18n = createContext<Ctx>({ lang: 'en', t: en, setLang: () => {} })
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(() => {
+  // Always start in English so the prerendered HTML and the first browser render match;
+  // a saved Hindi preference is applied right after the page loads.
+  const [lang, setLangState] = useState<Lang>('en')
+  useEffect(() => {
     try {
-      const s = localStorage.getItem('fg-lang')
-      if (s === 'hi' || s === 'en') return s
+      const saved = localStorage.getItem('fg-lang')
+      if (saved === 'hi') setLangState('hi')
     } catch { /* storage unavailable */ }
-    return 'en'
-  })
-  useEffect(() => { document.documentElement.lang = lang }, [lang])
+  }, [])
+  useEffect(() => { document.documentElement.lang = lang === 'hi' ? 'hi' : 'en' }, [lang])
   const setLang = (l: Lang) => {
     setLangState(l)
     try { localStorage.setItem('fg-lang', l) } catch { /* ignore */ }

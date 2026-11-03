@@ -33,4 +33,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
 </svg>`
 
 await sharp(Buffer.from(svg)).png({ palette: true, quality: 90 }).toFile('public/og.png')
-console.log('og.png written')
+// Home-screen icon for iOS, from the same mark as the favicon.
+const mark = readFileSync(new URL('../public/favicon.svg', import.meta.url))
+await sharp(mark, { density: 600 }).resize(180, 180).flatten({ background: '#0e1b2c' }).png().toFile('public/apple-touch-icon.png')
+console.log('og.png and apple-touch-icon.png written')

@@ -1,6 +1,9 @@
-// Site-wide settings. Change the brand or contact here.
+// Site-wide settings. The base URL comes from VITE_SITE_URL in .env (one place for the whole site).
 export const site = {
   name: 'FASTAG GUIDE',
+  url: (import.meta.env.VITE_SITE_URL as string).replace(/\/+$/, ''),
+  // Who runs the site. Shown in the footer and in structured data.
+  publisher: { name: 'Technokari', url: 'https://tools.technokari.com' },
   // Leave empty to hide the Contact link until a real address is set.
   contactEmail: '',
   official: {

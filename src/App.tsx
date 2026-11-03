@@ -3,10 +3,9 @@ import type { ProviderId } from './data/providers'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Wizard from './components/Wizard'
-import Compare from './components/Compare'
 import Passes from './components/Passes'
-import HowItWorks from './components/HowItWorks'
-import WhyUs from './components/WhyUs'
+import Compare from './components/Compare'
+import Method from './components/Method'
 import Faq from './components/Faq'
 import FinalCta from './components/FinalCta'
 import Footer from './components/Footer'
@@ -21,16 +20,15 @@ export default function App() {
   return (
     <>
       <a href="#find" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white">
-        Skip to the assistant
+        Skip to the toll pass finder
       </a>
       <Nav />
       <main>
         <Hero />
         <Wizard compareIds={compareIds} onToggleCompare={toggleCompare} onBankChange={setMyBank} />
-        <HowItWorks />
-        <Compare compareIds={compareIds} onToggleCompare={toggleCompare} myBank={myBank} onBankChange={setMyBank} />
         <Passes />
-        <WhyUs />
+        <Compare compareIds={compareIds} onToggleCompare={toggleCompare} myBank={myBank} onBankChange={setMyBank} />
+        <Method />
         <Faq />
         <FinalCta />
       </main>

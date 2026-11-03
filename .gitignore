@@ -4,3 +4,6 @@ public/og.png
 *.log
 .DS_Store
 .vercel
+dist-ssr
+public/apple-touch-icon.png
+*.tsbuildinfo

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
 import { ArrowUpRight, CheckCircle2, ChevronDown, Info, Pencil, Phone, RotateCcw, Scale, ShieldCheck, XCircle } from 'lucide-react'
 import { inr, useI18n } from '../i18n'
 import { computePasses, type OptionId, type PassOption } from '../lib/calc'
@@ -56,12 +55,12 @@ export default function Results({ a, onEdit, onRestart, compareIds, onToggleComp
   if (pass && homeTrips > 0 && a.dist === 'unsure') warns.push(r.w_unsureDist)
 
   return (
-    <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="grid gap-8">
+    <div className="animate-fade-up grid gap-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h3 className="text-[24px] font-semibold tracking-tight sm:text-[28px]">{r.h2}</h3>
+        <h3 id="results-heading" tabIndex={-1} className="text-[24px] font-semibold tracking-tight outline-none sm:text-[28px]">{r.h2}</h3>
         <div className="flex flex-wrap gap-2">
-          <button type="button" onClick={onEdit} className="btn-ghost !py-2.5"><Pencil size={16} /> {t.wiz.edit}</button>
-          <button type="button" onClick={onRestart} className="btn-ghost !py-2.5"><RotateCcw size={16} /> {t.wiz.restart}</button>
+          <button type="button" onClick={onEdit} className="btn-ghost !py-2.5"><Pencil size={16} aria-hidden="true" /> {t.wiz.edit}</button>
+          <button type="button" onClick={onRestart} className="btn-ghost !py-2.5"><RotateCcw size={16} aria-hidden="true" /> {t.wiz.restart}</button>
         </div>
       </div>
 
@@ -71,7 +70,7 @@ export default function Results({ a, onEdit, onRestart, compareIds, onToggleComp
         <ul className="grid gap-2">
           {warns.map((x) => (
             <li key={x} className="flex gap-2.5 rounded-2xl bg-[#fff8e6] p-4 text-[14.5px] text-[#6b4b00] ring-1 ring-[#f3dc9c]">
-              <Info size={18} className="mt-0.5 flex-none" /> {x}
+              <Info size={18} aria-hidden="true" className="mt-0.5 flex-none" /> {x}
             </li>
           ))}
         </ul>
@@ -85,7 +84,7 @@ export default function Results({ a, onEdit, onRestart, compareIds, onToggleComp
           </div>
           {!providersFirst && (
             <button type="button" className="btn-ghost !py-2.5" aria-expanded={showProviders} onClick={() => setShowProviders((s) => !s)}>
-              {showProviders ? r.hide : r.show} <ChevronDown size={16} className={`transition ${showProviders ? 'rotate-180' : ''}`} />
+              {showProviders ? r.hide : r.show} <ChevronDown size={16} aria-hidden="true" className={`transition ${showProviders ? 'rotate-180' : ''}`} />
             </button>
           )}
         </div>
@@ -101,14 +100,14 @@ export default function Results({ a, onEdit, onRestart, compareIds, onToggleComp
               <p className="max-w-2xl text-[13.5px] text-ink-mute">{t.foot.aff}</p>
               {compareIds.length > 0 && (
                 <button type="button" className="btn-primary !py-2.5" onClick={() => scrollToId('compare')}>
-                  <Scale size={16} /> {r.compareGo(compareIds.length)}
+                  <Scale size={16} aria-hidden="true" /> {r.compareGo(compareIds.length)}
                 </button>
               )}
             </div>
           </>
         )}
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -148,12 +147,12 @@ function PassCard({ pass, status }: { pass: ReturnType<typeof computePasses>; st
               {(pass.best.id === 'local' || pass.best.id === 'annual') && (
                 <a href={pass.best.id === 'local' ? site.official.rajmargYatraLocalPass : site.official.rajmargYatra}
                   target="_blank" rel="noopener" className="mt-3 inline-flex items-center gap-1.5 text-[14px] font-semibold text-brand-200 hover:text-white">
-                  {r.official} <ArrowUpRight size={15} />
+                  {r.official} <ArrowUpRight size={15} aria-hidden="true" />
                 </a>
               )}
             </div>
             <p className="mt-4 text-[12.5px] text-white/55">{t.pass.asOf}: {fmtDate(PASS.verifiedOn, lang)}</p>
-            {status === 'have' && <p className="mt-4 flex gap-2 text-[13.5px] text-white/75"><ShieldCheck size={16} className="mt-0.5 flex-none" /> {r.keepTag}</p>}
+            {status === 'have' && <p className="mt-4 flex gap-2 text-[13.5px] text-white/75"><ShieldCheck size={16} aria-hidden="true" className="mt-0.5 flex-none" /> {r.keepTag}</p>}
           </div>
         </div>
         <ul className="divide-y divide-dashed divide-line p-6 sm:p-8">
@@ -163,7 +162,7 @@ function PassCard({ pass, status }: { pass: ReturnType<typeof computePasses>; st
               <li key={o.id} className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 py-4 first:pt-0 last:pb-0">
                 <span className={`flex items-center gap-2 font-semibold ${o.available ? '' : 'text-ink-mute'}`}>
                   {label(o.id)}{o.id === 'local' && o.available ? ` (${inr(o.localPrice!)})` : ''}
-                  {best && <span className="rounded-full bg-amber-400 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-[#2a2100]">{r.best}</span>}
+                  {best && <span className="rounded-full bg-amber-400 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-[#2a2100]">{r.best}</span>}
                 </span>
                 <span className={`num text-right ${o.available ? 'text-[18px] font-semibold' : 'text-[14px] text-ink-mute'}`}>
                   {o.available ? inr(Math.round(o.cost)) : reason(o)}
@@ -209,21 +208,21 @@ function ProviderCard({ pick, featured, lang, inCompare, onToggle }: { pick: Pro
       </dl>
       <p className="mt-2 text-[13.5px] text-ink-mute"><span className="font-medium text-ink-soft">{r.rechargeL}:</span> {p.recharge[lang]}</p>
       <ul className="mt-4 grid gap-1.5 text-[14px]">
-        {p.pros[lang].map((x) => <li key={x} className="flex gap-2"><CheckCircle2 size={16} className="mt-0.5 flex-none text-brand-600" /> {x}</li>)}
-        {p.cons[lang].map((x) => <li key={x} className="flex gap-2 text-ink-soft"><XCircle size={16} className="mt-0.5 flex-none text-ink-mute" /> {x}</li>)}
+        {p.pros[lang].map((x) => <li key={x} className="flex gap-2"><CheckCircle2 size={16} aria-hidden="true" className="mt-0.5 flex-none text-brand-600" /> {x}</li>)}
+        {p.cons[lang].map((x) => <li key={x} className="flex gap-2 text-ink-soft"><XCircle size={16} aria-hidden="true" className="mt-0.5 flex-none text-ink-mute" /> {x}</li>)}
       </ul>
       <p className="mt-4 flex items-center gap-1.5 text-[13.5px] text-ink-soft">
-        <Phone size={14} /> {p.support ? <span className="num select-all">{p.support}</span> : r.supportNone}
+        <Phone size={14} aria-hidden="true" /> {p.support ? <span className="num select-all">{p.support}</span> : r.supportNone}
       </p>
       <div className="mt-2 grid gap-2"><VerifyLine p={p} /><ChangeNotes p={p} /></div>
       <div className="mt-5 flex flex-wrap gap-2 pt-1 sm:mt-auto">
         <a href={providerLink(p)} target="_blank" rel={p.affiliateUrl ? 'sponsored noopener' : 'noopener'}
           onClick={() => track('provider_link_clicked', { provider: p.id, source: 'results', affiliate: Boolean(p.affiliateUrl) })}
           className={`${featured ? 'btn-brand' : 'btn-primary'} flex-1 !py-2.5`}>
-          {r.view} <ArrowUpRight size={16} />
+          {r.view} <ArrowUpRight size={16} aria-hidden="true" />
         </a>
         <button type="button" onClick={onToggle} aria-pressed={inCompare} className={`btn-ghost !py-2.5 ${inCompare ? '!bg-brand-50 !ring-brand-500' : ''}`}>
-          <Scale size={16} /> {inCompare ? r.compared : r.compare}
+          <Scale size={16} aria-hidden="true" /> {inCompare ? r.compared : r.compare}
         </button>
       </div>
     </article>

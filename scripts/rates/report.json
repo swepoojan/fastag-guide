@@ -1,0 +1,73 @@
+{
+  "checkedOn": "2026-11-03",
+  "sources": {
+    "hdfc": {
+      "url": "https://v.hdfc.bank.in/htdocs/common/fastag/feescharges.html",
+      "ok": false,
+      "reason": "missing issuanceFee: label not found; securityDeposit: label not found; minBalance: label not found",
+      "found": {},
+      "snippets": {},
+      "status": "ok"
+    },
+    "icici": {
+      "url": "https://www.icici.bank.in/personal-banking/payments/fastag/fees-and-charges",
+      "ok": false,
+      "reason": "missing issuanceFee: label not found; securityDeposit: label not found; minBalance: label not found",
+      "found": {},
+      "snippets": {},
+      "status": "ok"
+    },
+    "axis": {
+      "url": "https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx",
+      "ok": true,
+      "found": {
+        "issuanceFee": 100,
+        "securityDeposit": 200,
+        "minBalance": 100
+      },
+      "snippets": {
+        "issuanceFee": "issuance fee of INR 100",
+        "securityDeposit": "Refundable security deposit of INR 200",
+        "minBalance": "Initial wallet top up / recharge of minimum INR 100"
+      },
+      "status": "ok"
+    },
+    "sbi": {
+      "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
+      "ok": false,
+      "reason": "missing issuanceFee: label not found; securityDeposit: label not found; minBalance: label not found",
+      "found": {},
+      "snippets": {},
+      "status": "ok"
+    },
+    "idfc": {
+      "url": "https://www.idfcfirst.bank.in/personal-banking/fastag/fees-and-charges",
+      "ok": false,
+      "reason": "missing issuanceFee: label not found; securityDeposit: label not found; minBalance: label not found",
+      "found": {},
+      "snippets": {},
+      "status": "ok"
+    },
+    "airtel": {
+      "url": "https://www.airtel.in/fastag-faq/",
+      "ok": true,
+      "found": {
+        "issuanceFee": 100,
+        "securityDeposit": 200,
+        "minBalance": 150
+      },
+      "snippets": {
+        "issuanceFee": "Tag Cost: Rs.100",
+        "securityDeposit": "Refundable Security Deposit: Rs. 200",
+        "minBalance": "Minimum Balance: Rs. 150"
+      },
+      "status": "ok"
+    },
+    "passes": {
+      "url": "https://rajmargyatra.nhai.gov.in/buy-fastag-local-pass",
+      "ok": false,
+      "reason": "page looked empty (may need a browser)",
+      "status": "ok"
+    }
+  }
+}

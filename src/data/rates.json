@@ -1,18 +1,82 @@
 {
   "providers": {
-    "hdfc": { "values": { "issuanceFee": 100, "securityDeposit": 200, "minBalance": 0 }, "status": "ok", "lastVerified": "2026-11-03", "pending": null, "failures": 0 },
-    "icici": { "values": { "issuanceFee": 99.12, "securityDeposit": 200, "minBalance": 100 }, "status": "ok", "lastVerified": "2026-11-03", "pending": null, "failures": 0 },
-    "axis": { "values": { "issuanceFee": 100, "securityDeposit": 200, "minBalance": 100 }, "status": "ok", "lastVerified": "2026-11-03", "pending": null, "failures": 0 },
-    "sbi": { "values": { "issuanceFee": 100, "securityDeposit": 200, "minBalance": 100 }, "status": "ok", "lastVerified": "2026-11-03", "pending": null, "failures": 0 },
-    "idfc": { "values": { "issuanceFee": 100, "securityDeposit": 200, "minBalance": 100 }, "status": "ok", "lastVerified": "2026-11-03", "pending": null, "failures": 0 },
-    "airtel": { "values": { "issuanceFee": 100, "securityDeposit": 200, "minBalance": 150 }, "status": "ok", "lastVerified": "2026-11-03", "pending": null, "failures": 0 }
+    "hdfc": {
+      "values": {
+        "issuanceFee": 100,
+        "securityDeposit": 200,
+        "minBalance": 0
+      },
+      "status": "ok",
+      "lastVerified": "2026-11-03",
+      "pending": null,
+      "failures": 1
+    },
+    "icici": {
+      "values": {
+        "issuanceFee": 99.12,
+        "securityDeposit": 200,
+        "minBalance": 100
+      },
+      "status": "ok",
+      "lastVerified": "2026-11-03",
+      "pending": null,
+      "failures": 1
+    },
+    "axis": {
+      "values": {
+        "issuanceFee": 100,
+        "securityDeposit": 200,
+        "minBalance": 100
+      },
+      "status": "ok",
+      "lastVerified": "2026-11-03",
+      "pending": null,
+      "failures": 0
+    },
+    "sbi": {
+      "values": {
+        "issuanceFee": 100,
+        "securityDeposit": 200,
+        "minBalance": 100
+      },
+      "status": "ok",
+      "lastVerified": "2026-11-03",
+      "pending": null,
+      "failures": 1
+    },
+    "idfc": {
+      "values": {
+        "issuanceFee": 100,
+        "securityDeposit": 200,
+        "minBalance": 100
+      },
+      "status": "ok",
+      "lastVerified": "2026-11-03",
+      "pending": null,
+      "failures": 1
+    },
+    "airtel": {
+      "values": {
+        "issuanceFee": 100,
+        "securityDeposit": 200,
+        "minBalance": 150
+      },
+      "status": "ok",
+      "lastVerified": "2026-11-03",
+      "pending": null,
+      "failures": 0
+    }
   },
   "passes": {
-    "values": { "annual": 3075, "localOutside": 1500, "localInside": 3000 },
+    "values": {
+      "annual": 3075,
+      "localOutside": 1500,
+      "localInside": 3000
+    },
     "status": "ok",
     "lastVerified": "2026-11-03",
     "pending": null,
-    "failures": 0
+    "failures": 1
   },
   "history": []
 }

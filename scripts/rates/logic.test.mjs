@@ -71,36 +71,44 @@ describe('simulated fee change: HDFC raises issuance fee ₹100 → ₹120', () 
 
 describe('safety guards', () => {
   it('implausible jump (deposit ₹200 → ₹950) is never published', () => {
-    const one = step(published, 'hdfc-misread', '2026-11-04')
+    const one = step(published, 'hdfc-misread', '2026-11-05')
     expect(one.result.ok).toBe(false)
     expect(one.result.reason).toMatch(/too large to trust/)
     expect(one.entry.values.securityDeposit).toBe(200)
     expect(one.entry.status).toBe('ok') // one failure is tolerated
 
-    const two = step(one.entry, 'hdfc-misread', '2026-11-04')
-    expect(two.entry.status).toBe('unverified') // second failure: site says "couldn't verify"
+    const two = step(one.entry, 'hdfc-misread', '2026-11-05')
+    expect(two.entry.status).toBe('unverified') // failing and last success 2+ days old: "couldn't verify"
     expect(two.entry.values.securityDeposit).toBe(200)
     expect(two.entry.lastVerified).toBe('2026-11-03')
   })
 
   it('page layout changed (labels gone): unverified, old values kept', () => {
-    const one = step(published, 'hdfc-layout-changed', '2026-11-04')
+    const one = step(published, 'hdfc-layout-changed', '2026-11-05')
     expect(one.result.reason).toMatch(/missing/)
-    const two = step(one.entry, 'hdfc-layout-changed', '2026-11-04')
+    const two = step(one.entry, 'hdfc-layout-changed', '2026-11-05')
     expect(two.entry.status).toBe('unverified')
     expect(two.entry.values).toEqual(published.values)
   })
 
   it('bank page blocked: unverified after two tries, recovers when readable again', () => {
     const blocked = [{ error: 'HTTP 403' }, { error: 'HTTP 403' }]
-    const a = step(published, blocked, '2026-11-04').entry
-    const b = step(a, blocked, '2026-11-04').entry
+    const a = step(published, blocked, '2026-11-05').entry
+    const b = step(a, blocked, '2026-11-05').entry
     expect(b.status).toBe('unverified')
-    const c = step(b, blocked, '2026-11-04').entry
+    const c = step(b, blocked, '2026-11-05').entry
     expect(c).toEqual(b) // keeps failing → file doesn't change → no redeploy
     const d = step(c, 'hdfc-original', '2026-11-06').entry
     expect(d.status).toBe('ok')
     expect(d.lastVerified).toBe('2026-11-06')
+  })
+
+  it('a bad day does not show warnings: failures within 2 days keep the last checked date', () => {
+    const blocked = [{ error: 'HTTP 503' }, { error: 'HTTP 503' }]
+    const a = step(published, blocked, '2026-11-04').entry
+    const b = step(a, blocked, '2026-11-04').entry
+    expect(b.status).toBe('ok')
+    expect(b.lastVerified).toBe('2026-11-03')
   })
 
   it('two reads that disagree are rejected', () => {

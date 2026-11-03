@@ -22,9 +22,9 @@ const ok = (id) => [{ values: rates.providers[id].values, missing: [] }, { value
 const blocked = [{ error: 'HTTP 403' }, { error: 'HTTP 403' }]
 
 const checks = [
-  { when: '2026-11-04', label: 'check 1', pages: { hdfc: hdfc('hdfc-fee-raised'), airtel: blocked } },
-  { when: '2026-11-04', label: 'check 2 (5 minutes later)', pages: { hdfc: hdfc('hdfc-fee-raised'), airtel: blocked } },
-  { when: '2026-11-05', label: 'check 3 (next day)', pages: { hdfc: hdfc('hdfc-fee-raised') } },
+  { when: '2026-11-05', label: 'check 1', pages: { hdfc: hdfc('hdfc-fee-raised'), airtel: blocked } },
+  { when: '2026-11-05', label: 'check 2 (5 minutes later)', pages: { hdfc: hdfc('hdfc-fee-raised'), airtel: blocked } },
+  { when: '2026-11-06', label: 'check 3 (next day)', pages: { hdfc: hdfc('hdfc-fee-raised') } },
 ]
 
 let n = 0

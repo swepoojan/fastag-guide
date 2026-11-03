@@ -13,8 +13,12 @@ export const RANGES = {
 /** A single change bigger than this is treated as suspicious and not published. */
 export const maxChange = (old) => Math.max(150, Math.abs(old) * 1.0)
 
-/** How many failed checks in a row before a source is shown as "couldn't verify". */
+/** A source shows "couldn't verify" only after this many failed checks in a row... */
 export const FAILS_BEFORE_UNVERIFIED = 2
+/** ...and only once its last successful check is at least this many days old. */
+export const STALE_AFTER_DAYS = 2
+
+export const daysBetween = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000)
 
 // ---------- text extraction ----------
 
@@ -80,6 +84,20 @@ export function extract(text, spec) {
   return { values, snippets, missing }
 }
 
+/** For the report: where fee-like text appears on a page, to tune readers when a page fails. */
+export function diagnose(text, spec) {
+  const anchorAt = spec.anchor ? text.search(spec.anchor) : null
+  const windows = []
+  const re = /(fee|deposit|balance|threshold|top[\s-]*up|₹|\brs\.?\s*\d|\binr\b)/gi
+  let m
+  while ((m = re.exec(text)) && windows.length < 6) {
+    const s = Math.max(0, m.index - 80)
+    windows.push(text.slice(s, m.index + 140))
+    re.lastIndex = m.index + 140
+  }
+  return { textLength: text.length, anchorAt, windows }
+}
+
 // ---------- decision logic ----------
 
 const same = (a, b) => Object.keys(a).length === Object.keys(b).length && Object.keys(a).every((k) => a[k] === b[k])
@@ -118,7 +136,7 @@ export function applyCheck(entry, result, today, id) {
     // Capped so a source that keeps failing doesn't rewrite the file (and redeploy) on every run.
     // The failure reason goes to the report, not here, for the same reason.
     next.failures = Math.min(FAILS_BEFORE_UNVERIFIED, (entry.failures ?? 0) + 1)
-    if (next.failures >= FAILS_BEFORE_UNVERIFIED) next.status = 'unverified'
+    if (next.failures >= FAILS_BEFORE_UNVERIFIED && daysBetween(entry.lastVerified, today) >= STALE_AFTER_DAYS) next.status = 'unverified'
     return { entry: next, events }
   }
 

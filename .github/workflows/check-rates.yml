@@ -22,7 +22,7 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Skip 5-minute runs after the test window
         id: gate
@@ -39,6 +39,19 @@ jobs:
         if: steps.gate.outputs.skip != '1'
         with:
           node-version: 22
+
+      - name: Cache headless browser
+        if: steps.gate.outputs.skip != '1'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.48.2-chromium
+
+      - name: Install headless browser (for pages that need JavaScript)
+        if: steps.gate.outputs.skip != '1'
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.48.2
+          npx playwright install --with-deps chromium
 
       - name: Check official sources
         id: check

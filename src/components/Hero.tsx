@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2, Landmark, ListChecks, ReceiptIndianRupee } from 'lucide-react'
 import { useI18n } from '../i18n'
 import { scrollToId } from './ui'
+import Updated from './Updated'
+import { VERIFIED_ON } from '../data/providers'
 import { track } from '../lib/analytics'
 
 export default function Hero() {
@@ -45,6 +47,9 @@ export default function Hero() {
               <li key={l} className="flex items-center gap-2"><Icon size={17} className="text-brand-600" /> {l}</li>
             ))}
           </motion.ul>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.36 }} className="mt-5">
+            <Updated date={VERIFIED_ON} label={t.hero.updatedNote} />
+          </motion.div>
         </div>
         <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.1, ease }} className="min-w-0">
           <HeroArt />

@@ -2,7 +2,8 @@ import { useRef, useState } from 'react'
 import { ArrowUpRight, CalendarRange, Check, MapPin } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { inr, useI18n } from '../i18n'
-import { annualBreakEven } from '../lib/calc'
+import { annualBreakEven, PASS } from '../lib/calc'
+import Updated from './Updated'
 import { track } from '../lib/analytics'
 import { site } from '../config'
 import { Reveal, Section, SectionHead } from './ui'
@@ -28,6 +29,10 @@ export default function Passes() {
     <Section id="passes" className="bg-ink text-white">
       <div className="[&_.eyebrow]:text-brand-200 [&_.h2]:text-white [&_.lead]:text-white/70">
         <SectionHead eyebrow={p.eyebrow} title={p.h2} sub={p.sub} />
+      </div>
+      <div className="mt-5 flex flex-wrap items-center gap-3">
+        <Updated date={PASS.verifiedOn} label={p.asOf} tone="dark" />
+        <span className="text-[13px] text-white/60">{p.source}</span>
       </div>
 
       <div className="mt-12 grid gap-5 lg:grid-cols-2">

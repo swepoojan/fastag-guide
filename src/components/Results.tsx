@@ -8,6 +8,7 @@ import { providerLink, upfront, type ProviderId } from '../data/providers'
 import { track } from '../lib/analytics'
 import { site } from '../config'
 import { scrollToId } from './ui'
+import { PASS } from '../lib/calc'
 import { OTHER_CROSSINGS, passVehicle, roundTripsOf, type Answers } from './Wizard'
 
 interface Props {
@@ -111,7 +112,7 @@ export default function Results({ a, onEdit, onRestart, compareIds, onToggleComp
 }
 
 function PassCard({ pass, status }: { pass: ReturnType<typeof computePasses>; status: Answers['status'] }) {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const r = t.res
   const label = (id: OptionId) => ({ pay: r.opt_pay, annual: r.opt_annual, local: r.opt_local, monthly: r.opt_monthly })[id]
   const note = (o: PassOption) => {
@@ -150,6 +151,7 @@ function PassCard({ pass, status }: { pass: ReturnType<typeof computePasses>; st
                 </a>
               )}
             </div>
+            <p className="mt-4 text-[12.5px] text-white/55">{t.pass.asOf}: {fmtDate(PASS.verifiedOn, lang)}</p>
             {status === 'have' && <p className="mt-4 flex gap-2 text-[13.5px] text-white/75"><ShieldCheck size={16} className="mt-0.5 flex-none" /> {r.keepTag}</p>}
           </div>
         </div>

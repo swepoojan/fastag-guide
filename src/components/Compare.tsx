@@ -5,6 +5,7 @@ import { providers, providerLink, upfront, VERIFIED_ON, type Provider, type Prov
 import { track } from '../lib/analytics'
 import { Reveal, Section, SectionHead } from './ui'
 import { ProviderLogo, fmtDate } from './Results'
+import Updated from './Updated'
 
 type Filter = 'all' | 'low' | 'online' | 'upi' | 'bank'
 
@@ -66,7 +67,8 @@ export default function Compare({ compareIds, onToggleCompare, myBank, onBankCha
   return (
     <Section id="compare">
       <SectionHead eyebrow={c.eyebrow} title={c.h2} sub={c.sub} />
-      <Reveal className="mt-8 flex flex-wrap items-center gap-2">
+      <div className="mt-4"><Updated date={VERIFIED_ON} /></div>
+      <Reveal className="mt-6 flex flex-wrap items-center gap-2">
         {filters.map((f) => (
           <button key={f.id} type="button" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)} className={`chip ${filter === f.id ? 'chip-on' : ''}`}>
             {f.l}

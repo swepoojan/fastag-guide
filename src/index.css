@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { @apply bg-white text-ink antialiased; font-feature-settings: 'ss01'; }
+  h1, h2, h3 { text-wrap: balance; }
+  :focus-visible { outline: 2px solid #10a36b; outline-offset: 2px; }
+  input[type='number']::-webkit-inner-spin-button { opacity: 1; }
+}
+
+@layer components {
+  .gutter { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+  .eyebrow { @apply text-[13px] font-semibold uppercase tracking-[0.12em] text-brand-700; }
+  .h2 { @apply text-[28px] leading-[1.15] font-semibold tracking-tight text-ink sm:text-[38px]; }
+  .lead { @apply text-[17px] leading-relaxed text-ink-soft; }
+  .btn { @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-3 text-[15px] font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn bg-ink text-white shadow-soft hover:bg-[#1b2c42] active:scale-[.98]; }
+  .btn-brand { @apply btn bg-brand-600 text-white shadow-soft hover:bg-brand-700 active:scale-[.98]; }
+  .btn-ghost { @apply btn bg-white text-ink ring-1 ring-line hover:ring-ink/30 hover:bg-paper; }
+  .card { @apply rounded-3xl bg-white ring-1 ring-line/80 shadow-soft; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-medium ring-1 ring-line bg-white text-ink-soft transition hover:ring-ink/30; }
+  .chip-on { @apply bg-ink text-white ring-ink hover:ring-ink; }
+  .num { @apply font-mono tabular-nums; }
+  .field { @apply flex items-center rounded-2xl bg-paper ring-1 ring-line focus-within:ring-2 focus-within:ring-brand-500 transition; }
+  .field input { @apply w-full min-w-0 bg-transparent px-4 py-3 font-mono text-lg font-medium tabular-nums outline-none; }
+  .link { @apply font-medium text-brand-700 underline decoration-brand-200 underline-offset-4 hover:decoration-brand-600; }
+}

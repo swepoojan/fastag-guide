@@ -1,0 +1,6 @@
+node_modules
+dist
+public/og.png
+*.log
+.DS_Store
+.vercel

@@ -9,7 +9,7 @@
       "status": "ok",
       "lastVerified": "2026-11-03",
       "pending": null,
-      "failures": 1
+      "failures": 2
     },
     "icici": {
       "values": {
@@ -20,7 +20,7 @@
       "status": "ok",
       "lastVerified": "2026-11-03",
       "pending": null,
-      "failures": 1
+      "failures": 2
     },
     "axis": {
       "values": {
@@ -42,7 +42,7 @@
       "status": "ok",
       "lastVerified": "2026-11-03",
       "pending": null,
-      "failures": 1
+      "failures": 2
     },
     "idfc": {
       "values": {
@@ -53,7 +53,7 @@
       "status": "ok",
       "lastVerified": "2026-11-03",
       "pending": null,
-      "failures": 1
+      "failures": 2
     },
     "airtel": {
       "values": {
@@ -76,7 +76,7 @@
     "status": "ok",
     "lastVerified": "2026-11-03",
     "pending": null,
-    "failures": 1
+    "failures": 2
   },
   "history": []
 }

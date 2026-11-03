@@ -4,22 +4,49 @@
     "hdfc": {
       "url": "https://v.hdfc.bank.in/htdocs/common/fastag/feescharges.html",
       "ok": false,
+      "method": "browser",
       "reason": "missing issuanceFee: label not found; securityDeposit: label not found; minBalance: label not found",
       "found": {},
       "snippets": {},
-      "status": "ok"
+      "status": "ok",
+      "diagnostics": {
+        "textLength": 1165,
+        "anchorAt": 357,
+        "windows": [
+          "Login Home Fees & Charges Fees & Charges Charges on reload/recharge Convenience Fee Applicable Charges Debit Card Nil Net Banking 1.7% + taxes Credit C",
+          "1.7% + taxes Credit Card 0.90% + taxes Other Applicable Charges FASTag Issuance fee (One time) ₹100 (including taxes) FASTag Reissuance fee ₹100 (including taxes) FASTag Fees NPCI Vehicle Class Security Deposit Minimum B",
+          "e Class 4 Car / Jeep / Van / Tata ace and similar mini light commercial vehicle ₹200 NIL Class 5 Light commercial vehicle 2-axle ₹300 ₹200 Class 6 Bus 3-axle ₹400 ₹500 Class 6 Truck 3-axle ₹500 ₹500 Class 7 Bus 2-axle / ",
+          "₹500 Class 6 Truck 3-axle ₹500 ₹500 Class 7 Bus 2-axle / mini bus, truck 2-axle ₹400 ₹500 Class 12 Tractor / tractor with trailer, truck 4, 5 & 6-axle ₹500 ₹500 Class 15 Truck 7-axle & above ₹500 ₹500 Class 16 Earth movi",
+          "k 7-axle & above ₹500 ₹500 Class 16 Earth moving / heavy construction machinery ₹500 ₹500 Terms of Use List of empaneled partners for HDFC Bank FASTag Issuance Contact Us +91 7070022222 For instant FASTag support, send \"",
+          "rite to: support.fastag@hdfc.bank.in 24×7 National Highway Helpline Number 1033 Fees & Charges Find Answers © 2021 HDFC Bank Ltd. All rights reserved."
+        ]
+      }
     },
     "icici": {
       "url": "https://www.icici.bank.in/personal-banking/payments/fastag/fees-and-charges",
       "ok": false,
-      "reason": "missing issuanceFee: label not found; securityDeposit: label not found; minBalance: label not found",
+      "method": "browser",
+      "reason": "missing issuanceFee: anchor not found; securityDeposit: anchor not found; minBalance: anchor not found",
       "found": {},
       "snippets": {},
-      "status": "ok"
+      "status": "ok",
+      "diagnostics": {
+        "textLength": 5684,
+        "anchorAt": -1,
+        "windows": [
+          " iPal Save Items Open Accessibility Menu Country Dropdown Login Payments FASTag Fees and Charges FASTag Fees And Charges FASTag charges include tag issuance fee and one-time deposit amount (that will comprise of security",
+          "de tag issuance fee and one-time deposit amount (that will comprise of security deposit and wallet recharge amount). The security deposit amount varies by vehicle category and is refundable upon account closure, subject ",
+          " Tag class and usage requirements. TO RECHARGE – LOGIN NOW BUY NOW Tag Issuance Fee: PARTICULARS AMOUNT (INR) Tag Joining Fee* ₹99.12 (including GST) *Taxes, as applicable, will be levied on all the prescribed fees and c",
+          "levied on all the prescribed fees and charges at the applicable rates. One-time deposit amount: Tag Class Description Security Deposit (in ₹) Threshold amount (in ₹) 4 TATA Ace and similar mini Light Commercial Vehicle 2",
+          "800 2100 104> (Chargeable number: <1860 2670 104>) Missed call facility to know balance You can check your ICICI Bank FASTag balance by giving a missed call on 801 092 8888 from your registered mobile number. TO RECHARGE",
+          "your registered mobile number. TO RECHARGE – LOGIN NOW FASTag FAQs ICICI FASTag Fees and Charges FASTag is a chip that is similar to the RFID tags which car companies place in a sticker on the windshield. It has all your"
+        ]
+      }
     },
     "axis": {
       "url": "https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx",
       "ok": true,
+      "method": "fetch",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,
@@ -35,22 +62,49 @@
     "sbi": {
       "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
       "ok": false,
-      "reason": "missing issuanceFee: label not found; securityDeposit: label not found; minBalance: label not found",
+      "method": "browser",
+      "reason": "missing issuanceFee: anchor not found; securityDeposit: anchor not found; minBalance: anchor not found",
       "found": {},
       "snippets": {},
-      "status": "ok"
+      "status": "ok",
+      "diagnostics": {
+        "textLength": 3759,
+        "anchorAt": -1,
+        "windows": [
+          "s | Corporate Governance | Investor Relations | SBI In the News | Grahak Setu | Feedback हिंदी Customer Care Careers Net Banking PERSONAL Accounts Investments & Deposits Loans Cards SBI Rewardz Digital Information & Serv",
+          "al Bankingfaq-on-cbdcNETC FASTagYonoShow More SBI FASTag About SBI FASTag FAQ's Fees & Other Charges SBI FASTag Portability Step-By-Step Process What is SBI FASTag. SBI FASTag is a device that employs Radio Frequency Ide",
+          " issuers and if it is linked to the prepaid account, then you need to recharge/ top up the tag as per your requirement. URL of FASTag Customer Portal https://fastag.sbi.bank.in/ Benefits of the SBI FASTag Save Time, Fuel",
+          "sbi.bank.in/ Benefits of the SBI FASTag Save Time, Fuel and Money Easy recharge/Top up of the FASTag account through authorised service providers of SBI across country. Online recharge of the SBI FASTag through dedicated",
+          "t banking, wallets etc. You can view transaction history, toll payment history, balance in the account etc. in the customer portal URL of Customer Complaint https://crh.sbi.bank.in/ Contact Us For more details please con",
+          "Pension Loan SB Account Gold Loan NRE SB Account Education Loan Auto Loan Fixed Deposit PM Surya Ghar Loan Against MF Agriculture Loans 7.50%* p.a. onwards w.e.f. 15.10.2026 *T&C Apply. SEE PRODUCTS APPLY NOW Quick Links"
+        ]
+      }
     },
     "idfc": {
       "url": "https://www.idfcfirst.bank.in/personal-banking/fastag/fees-and-charges",
       "ok": false,
-      "reason": "missing issuanceFee: label not found; securityDeposit: label not found; minBalance: label not found",
+      "method": "browser",
+      "reason": "missing issuanceFee: anchor not found; securityDeposit: anchor not found; minBalance: anchor not found",
       "found": {},
       "snippets": {},
-      "status": "ok"
+      "status": "ok",
+      "diagnostics": {
+        "textLength": 7268,
+        "anchorAt": -1,
+        "windows": [
+          "ice Contact us Service request Locate a branch Raise a complaint Login Accounts Deposits Loans Wealth Management Privilege Program Payments Cards Accounts View All Savings Account Senior Citizens Savings Account FIRST Po",
+          " BRAVO (Auto Sweep) Convert the idle funds in your current account into a fixed deposit with the BRAVO feature. Know More All Credit Cards Newly Launched New Premium Metal Credit Cards Lifetime Free Credit Cards FD-Backe",
+          "llo Cashback Cashback UPI-Ready Assured Gaj: Credit Card Invite Only Zero Forex ₹12,500 Diamond Reserve Zero Forex Travel ₹3,000 Accounts Deposits Money Transfer Investments Cards Services GIFT City Accounts View All NRE",
+          " Account Apply Now Credit Card Apply Now Personal Loan Apply Now Accounts Fixed Deposit Book Now Current Account Apply Now FASTag Apply Now Discover Earn up to 7% interest on your Savings Account Open Account Now WhatsAp",
+          "Wholesale Seamless access to your A/C and services HOME PERSONAL BANKING FASTAG FEES AND CHARGES FASTag Fees and Charges Apply Now Charges Applicable on FASTag Tag Deposit and Minimum Balance ***Please note : The Securit",
+          "licable on FASTag Tag Deposit and Minimum Balance ***Please note : The Security Deposit and Minimum Balance are applicable as on the current date, they might change in future to adhere to the NPCI guidelines. For more in"
+        ]
+      }
     },
     "airtel": {
       "url": "https://www.airtel.in/fastag-faq/",
       "ok": true,
+      "method": "fetch",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,
@@ -66,8 +120,22 @@
     "passes": {
       "url": "https://rajmargyatra.nhai.gov.in/buy-fastag-local-pass",
       "ok": false,
-      "reason": "page looked empty (may need a browser)",
-      "status": "ok"
+      "method": "browser",
+      "reason": "missing localOutside: label not found; localInside: label not found",
+      "found": {
+        "annual": 1033
+      },
+      "snippets": {
+        "annual": "Annual Pass Route Planner Toll Info 1033"
+      },
+      "status": "ok",
+      "diagnostics": {
+        "textLength": 2939,
+        "anchorAt": null,
+        "windows": [
+          "ocal Pass is currently available at 670+ toll plazas across India starting from ₹350* and available on the Rajmargyatra mobile app. For rest you can visit Toll Plaza. All States Showing all 676 toll plazas Aganampudi STA"
+        ]
+      }
     }
   }
 }

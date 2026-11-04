@@ -41,8 +41,9 @@
     },
     "axis": {
       "url": "https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx",
-      "ok": true,
+      "ok": false,
       "method": "fetch",
+      "reason": "two reads disagreed",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,
@@ -58,7 +59,7 @@
     "sbi": {
       "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
       "ok": true,
-      "method": "browser",
+      "method": "fetch",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,
@@ -89,6 +90,9 @@
       "diagnostics": {
         "textLength": 35217,
         "anchorAt": null,
+        "afterHeaders": [
+          "Security Deposit and Minimum Balance are applicable as on the current date, they might change in future to adhere to the NPCI guidelines. For more information on Max subscription, please refer to the section Max Privilege services. The Schedule of charges are subject to change as per the Bank’s discretion and would be notified to the FASTag members as and when applicable by displaying the same on Bank’s website. Any government charges, duty or debts, or tax payable because of the FASTag, shall be the FASTag Member’s responsibility and if imposed upon IDFC FIRST Bank (either directly or indirectly), IDFC FIRST Bank shall debit su"
+        ],
         "windows": [
           "FASTag Fees & Charges - Know All Costs Before You Buy! | IDFC FIRST Bank --> --> --> | | Text size: | S M L | | Letter spacing: | | | | | | | | | | | | | Personal | Business | Credit Card | NRI | The Bank | ",
           "uest Locate a branch Raise a complaint | | | | Login | | | | | | | | Accounts | Deposits | Loans | Wealth Management | Privilege Program | Payments | Cards | | | Accounts View All | | Savings Account | Senior Citizens Savings Account | FIRST Power Women Savings Account | Minor Sa",

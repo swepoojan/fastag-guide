@@ -33,7 +33,7 @@
       "status": "ok",
       "lastVerified": "2026-11-04",
       "pending": null,
-      "failures": 0,
+      "failures": 1,
       "provenBy": "4e107d53d5"
     },
     "sbi": {

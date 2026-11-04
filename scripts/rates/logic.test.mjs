@@ -40,6 +40,11 @@ describe('reading the bank pages', () => {
     expect(r.missing).toEqual([])
     expect(r.values).toEqual({ issuanceFee: 100, securityDeposit: 200, minBalance: 100 })
   })
+  it('IDFC FIRST: a sentence naming the same columns is not taken for the table header', () => {
+    const prose = 'The Security Deposit and Minimum Balance are applicable as on the current date. Tag Class rules apply. '
+    const r = extract(prose + 'x '.repeat(1000) + page('idfc') + ' ' + prose, sources.providers.idfc)
+    expect(r.values).toEqual({ issuanceFee: 100, securityDeposit: 200, minBalance: 100 })
+  })
   it('ICICI: joining fee with paise, and the class 4 row', () => {
     const r = extract(page('icici'), sources.providers.icici)
     expect(r.missing).toEqual([])

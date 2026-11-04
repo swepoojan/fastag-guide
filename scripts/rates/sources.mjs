@@ -48,7 +48,8 @@ export const sources = {
       // "Car/Jeep/Van/Mini Light Commercial Vehicle | 4 | 200 | 100"
       url: 'https://www.idfcfirst.bank.in/personal-banking/fastag/fees-and-charges',
       fields: { issuanceFee: { labels: [/joining\s*fee/i], anchor: null } },
-      rows: [{ header: /security\s*deposit[^|]{0,8}[\s|]*minimum\s*balance/i, anchor: CAR_ROW, cells: [null, 'securityDeposit', 'minBalance'] }],
+      // The header must start at "Tag Class": the page also has a sentence naming both columns.
+      rows: [{ header: /tag\s*class[^.]{0,40}?security\s*deposit[^.]{0,40}?minimum\s*balance/i, anchor: CAR_ROW, cells: [null, 'securityDeposit', 'minBalance'] }],
     },
     airtel: {
       // "Tag Cost: Rs.100" "Refundable Security Deposit: Rs. 200" "Minimum Balance: Rs. 150"

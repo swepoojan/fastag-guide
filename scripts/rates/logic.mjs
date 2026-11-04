@@ -76,11 +76,20 @@ const CELL = /\b(nil)\b|(?:₹|\brs\.?|\binr)?\s*(?<![\w.])(\d[\d,]*(?:\.\d{1,2}
  * with null for a cell to skip (such as a class number).
  */
 export function readRow(text, row) {
-  const h = row.header.exec(text) ?? null
-  row.header.lastIndex = 0
-  if (!h) return { error: 'table header not found' }
-  const afterHeader = text.slice(h.index + h[0].length)
-  const a = afterHeader.match(row.anchor)
+  // A header phrase can also appear in prose, so try each header match in turn and use the first
+  // one with the vehicle row close below it.
+  const re = new RegExp(row.header.source, row.header.flags.replace('g', '') + 'g')
+  let h = null
+  let a = null
+  let afterHeader = ''
+  let headerSeen = false
+  for (const m of text.matchAll(re)) {
+    headerSeen = true
+    const rest = text.slice(m.index + m[0].length)
+    const found = rest.slice(0, row.within ?? 1500).match(row.anchor)
+    if (found) { h = m; a = found; afterHeader = rest; break }
+  }
+  if (!headerSeen) return { error: 'table header not found' }
   if (!a) return { error: 'vehicle row not found under the table header' }
   const start = a.index + a[0].length
   const rowText = afterHeader.slice(start, start + (row.window ?? 220))
@@ -144,7 +153,9 @@ export function diagnose(text, spec) {
     const h = text.match(row.header)
     return h ? text.slice(h.index, h.index + h[0].length + 600) : null
   })
-  return { textLength: text.length, anchorAt, afterHeaders, windows }
+  // And where vehicle words appear, in case the header itself is worded differently.
+  const vehicleRows = [...text.matchAll(/jeep/gi)].slice(0, 4).map((m) => text.slice(Math.max(0, m.index - 300), m.index + 200))
+  return { textLength: text.length, anchorAt, afterHeaders, vehicleRows, windows }
 }
 
 // ---------- decision logic ----------

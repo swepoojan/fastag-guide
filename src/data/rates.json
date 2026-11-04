@@ -7,9 +7,10 @@
         "minBalance": 0
       },
       "status": "ok",
-      "lastVerified": "2026-11-03",
+      "lastVerified": "2026-11-04",
       "pending": null,
-      "failures": 2
+      "failures": 0,
+      "provenBy": "59992016bd"
     },
     "icici": {
       "values": {
@@ -18,9 +19,10 @@
         "minBalance": 100
       },
       "status": "ok",
-      "lastVerified": "2026-11-03",
+      "lastVerified": "2026-11-04",
       "pending": null,
-      "failures": 2
+      "failures": 0,
+      "provenBy": "9f4edf159e"
     },
     "axis": {
       "values": {
@@ -31,7 +33,8 @@
       "status": "ok",
       "lastVerified": "2026-11-04",
       "pending": null,
-      "failures": 0
+      "failures": 0,
+      "provenBy": "4e107d53d5"
     },
     "sbi": {
       "values": {
@@ -40,9 +43,10 @@
         "minBalance": 100
       },
       "status": "ok",
-      "lastVerified": "2026-11-03",
+      "lastVerified": "2026-11-04",
       "pending": null,
-      "failures": 2
+      "failures": 0,
+      "provenBy": "a0fdde3e18"
     },
     "idfc": {
       "values": {
@@ -64,7 +68,8 @@
       "status": "ok",
       "lastVerified": "2026-11-04",
       "pending": null,
-      "failures": 0
+      "failures": 0,
+      "provenBy": "9f9b08ec2c"
     }
   },
   "passes": {

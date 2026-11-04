@@ -22,28 +22,41 @@
     },
     "icici": {
       "url": "https://www.icici.bank.in/personal-banking/payments/fastag/fees-and-charges",
-      "ok": true,
-      "method": "fetch",
+      "ok": false,
+      "method": "browser",
+      "reason": "missing securityDeposit: vehicle row not found under the table header; minBalance: vehicle row not found under the table header",
       "found": {
-        "securityDeposit": 200,
-        "minBalance": 100,
         "issuanceFee": 99.12
       },
       "snippets": {
-        "securityDeposit": "4 | TATA Ace and similar mini Light Commercial Vehicle | Violet | 200 | 100",
-        "minBalance": "4 | TATA Ace and similar mini Light Commercial Vehicle | Violet | 200 | 100",
         "issuanceFee": "Joining Fee* | ₹99.12"
       },
-      "tableExcerpts": [
-        "Security Deposit (in ₹) | Threshold amount (in ₹) | | 4 | | TATA Ace and similar mini Light Commercial Vehicle | 200 | 100 | | 5 | Light Commercial Vehicle / Mini Bus | 300 | 100 | | 6 | Bus 3 Axle | 400 | 100 | | 6 | Truck 3 Axle | 500 | 100 | | 7 | Bus 2 Axle / Truck 2 Axle | 400 | 100 | | 12 | Tractor / Tractor with trailer / Truck 4/ 5/ 6 Axle | 500 | 100 | | 15 | Truck 7 Axle and above | 500 | 100 | | 16 | Earth Moving / Heavy Construction Machinery | 500 | 100 | | | | | | | TOLL FREE NUMBER | | To know more about FASTag, please call our customer care on toll-free number &lt;1800 2100 104&gt; (Chargeable number: &lt;1860 2670 104&gt;) | | | | Missed call facility to know balance | | You can check your ICICI Bank FASTag balance by giving a missed call on 801 092 8888 from your registered mobile number. | | | | | TO RECHARGE – LOGIN NOW | | | | | FASTag FAQs | | ICICI FASTag Fees and Charges | | FASTag is a chip that is similar to the RFID tags which car companies place in a sticker on the windshield. It has all your details so when you pass through a toll, you can pay the FASTag charges by scanning. Paying FASTag charges at any toll plaza directly is contactless. You can open a prepaid FASTag account put in money so that the account is usable. You can keep reloading money in this account as long as you need to if you are going on a trip or trips that require you to pass through tolls. There will be FASTag lanes demarcated for every toll across the country. | | | New FASTag Charges | | PARTICULARS | AMOUNT (INR) | | Tag Joining Fee* | ₹99.12 (including GST) | | *Taxes, as applicable, will be levied on all the prescribed fees and charges at the applicable rates. | | | One-Time Tag Deposit Amount for FASTag | | Tag Class | Description | Tag Colour | Tag Deposit | Minimum Recharge amount | | 4 | | Car / Jeep / Van | | Violet | | 200 | | 100 | | | Tag Class | Description | Tag Colour | Tag Deposit | Threshold amount | | 4 | TATA Ace and similar mini Light Commercial Vehicle | Violet | 200 | 100 | | 5 | Light Commercial Vehicle / Mini Bus | Orange | 300 | 100 | | 6 | Bus 3 Axle | Ye"
-      ],
-      "status": "ok"
+      "status": "ok",
+      "diagnostics": {
+        "textLength": 20943,
+        "anchorAt": null,
+        "afterHeaders": [
+          "Security Deposit (in ₹) | Threshold amount (in ₹) | | 4 | | TATA Ace and similar mini Light Commercial Vehicle | 200 | 100 | | 5 | Light Commercial Vehicle / Mini Bus | 300 | 100 | | 6 | Bus 3 Axle | 400 | 100 | | 6 | Truck 3 Axle | 500 | 100 | | 7 | Bus 2 Axle / Truck 2 Axle | 400 | 100 | | 12 | Tractor / Tractor with trailer / Truck 4/ 5/ 6 Axle | 500 | 100 | | 15 | Truck 7 Axle and above | 500 | 100 | | 16 | Earth Moving / Heavy Construction Machinery | 500 | 100 | | | | | | | TOLL FREE NUMBER | | To know more about FASTag, please call our customer care on toll-free number &lt;1800 2100 104&gt; (Chargeable number: &lt;1860 2"
+        ],
+        "vehicleRows": [
+          "(INR) | | Tag Joining Fee* | ₹99.12 (including GST) | | *Taxes, as applicable, will be levied on all the prescribed fees and charges at the applicable rates. | | | One-Time Tag Deposit Amount for FASTag | | Tag Class | Description | Tag Colour | Tag Deposit | Minimum Recharge amount | | 4 | | Car / Jeep / Van | | Violet | | 200 | | 100 | | | Tag Class | Description | Tag Colour | Tag Deposit | Threshold amount | | 4 | TATA Ace and similar mini Light Commercial Vehicle | Violet | 200 | 100 | | 5 "
+        ],
+        "windows": [
+          "ICICI Bank FASTag Fees & Charges | Cost of New FASTag --> Skip to main content | | | | | | ICICI Bank Logo | | Close | Personal | Personal | | | Accounts | Back Accounts | Close | Savings Account | Salary Account | Cap",
+          " | | Open a Savings Account for seamless payments | | | Apply now | | | | | | | Deposits | Back Deposits | Close | Fixed Deposit | Monthly Pay-out Fixed Deposit | Recurring Deposit | iWish - Goal Based Savings | View all deposits | | | Fixed Deposit Interest Rates | Fixed Deposit",
+          " | | Open NRE/NRO accounts to manage your banking | | | Apply now | | | | | | | Deposits | Back Deposits | Close | Fixed Deposit | Recurring Deposit | Foreign Currency Non-Resident (FCNR)(B) Deposit | Resident Foreign Currency (RFC) Deposit | View all deposits | | | Fixed Deposit",
+          "RFC) Deposit | View all deposits | | | Fixed Deposit Interest Rates | Recurring Deposit Interest Rates | FCNR (B) FD Rates | RFC FD Rates | Fixed Deposit Calculator | | Dream it, achieve it! | | FDs offer stable returns for your dreams | | | Open FD | | | | | | | Investments | Ba",
+          "Close | Home Loan | Loan Against Property | Commercial Property Purchase Loan | Balance Transfer | Overdraft Against Fixed Deposits | Education Loan | Personal Loan | Credit Cards | | | | Home Loans | | Avail digital sanction in 5 simple steps | | | Apply now | | | | | | | Servic",
+          "ount | | | | Accounts that suit business needs! | | | | Apply now | | | | | | | Deposits | Back Deposits | Close | Fixed Deposits | Fixed Deposit backed Overdraft | | | Fixed Deposit Interest Rates | Fixed Deposit Calculator | | Dream it, achieve it! | | | | Open FD | | | | | | |",
+          "rack Applications | Form Center | Online Assist | Information Center | | FAQs | Feedback | Service Requests | Queries | Complaints | Report Suspicious Behaviour | Report unauthorized transaction | | | | | | | Toll Free No 1800 1080 | | Ask iPal | Save Items | Open Accessibility M",
+          "2India | Open 3-in-1 Account | | | | | open hamburger menu | | | | | | | FASTag Fees And Charges | | | | | | | | | | | Payments | FASTag | Fees and Charges | | | FASTag Fees And Charges | | | | | | FASTag charges include tag issuance fee and one-time deposit amount (that will com"
+        ]
+      }
     },
     "axis": {
       "url": "https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx",
-      "ok": false,
+      "ok": true,
       "method": "fetch",
-      "reason": "two reads disagreed",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,
@@ -59,7 +72,7 @@
     "sbi": {
       "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
       "ok": true,
-      "method": "fetch",
+      "method": "browser",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,
@@ -77,33 +90,22 @@
     },
     "idfc": {
       "url": "https://www.idfcfirst.bank.in/personal-banking/fastag/fees-and-charges",
-      "ok": false,
-      "method": "browser",
-      "reason": "missing securityDeposit: vehicle row not found under the table header; minBalance: vehicle row not found under the table header",
+      "ok": true,
+      "method": "fetch",
       "found": {
+        "securityDeposit": 200,
+        "minBalance": 100,
         "issuanceFee": 100
       },
       "snippets": {
+        "securityDeposit": "Car/Jeep/Van/Mini Light Commercial Vehicle | | 4 | | 200 | | 100",
+        "minBalance": "Car/Jeep/Van/Mini Light Commercial Vehicle | | 4 | | 200 | | 100",
         "issuanceFee": "Joining Fee | | ₹100"
       },
-      "status": "ok",
-      "diagnostics": {
-        "textLength": 35217,
-        "anchorAt": null,
-        "afterHeaders": [
-          "Security Deposit and Minimum Balance are applicable as on the current date, they might change in future to adhere to the NPCI guidelines. For more information on Max subscription, please refer to the section Max Privilege services. The Schedule of charges are subject to change as per the Bank’s discretion and would be notified to the FASTag members as and when applicable by displaying the same on Bank’s website. Any government charges, duty or debts, or tax payable because of the FASTag, shall be the FASTag Member’s responsibility and if imposed upon IDFC FIRST Bank (either directly or indirectly), IDFC FIRST Bank shall debit su"
-        ],
-        "windows": [
-          "FASTag Fees & Charges - Know All Costs Before You Buy! | IDFC FIRST Bank --> --> --> | | Text size: | S M L | | Letter spacing: | | | | | | | | | | | | | Personal | Business | Credit Card | NRI | The Bank | ",
-          "uest Locate a branch Raise a complaint | | | | Login | | | | | | | | Accounts | Deposits | Loans | Wealth Management | Privilege Program | Payments | Cards | | | Accounts View All | | Savings Account | Senior Citizens Savings Account | FIRST Power Women Savings Account | Minor Sa",
-          "t on your Savings Account | Get #MoreFromYourBank | Open an Account | | | | | | Deposits View All | | Fixed Deposit | Recurring Deposit | Safe Deposit Locker | Fixed Deposit Interest Rates | Recurring Deposit Interest Rates | | Tools & Calculators View All | | Fixed Deposit Calcu",
-          "Rates | | Tools & Calculators View All | | Fixed Deposit Calculator | Recurring Deposit Calculator | | | | | Discover | | Open a fixed deposit with high interest rates in 3 easy steps | | Know More | | | | | | Loans View All | | Personal Loan | Consumer Durable Loan | Home Loan |",
-          " Trusts & Societies | TASC Current Account | | | Custom Domestic Segment | ZERO Balance Account for Merchants | ZERO Balance Account for Professionals | Account for Farmers | | | Specific Purpose | SNRR Account | RERA Account | LOBOPO Account | ESCROW Account | | | | | | Startups",
-          "RAVO (Auto Sweep) | Convert the idle funds in your current account into a fixed deposit with the BRAVO feature. | Know More | | | | | | MSME View all Payment Solutions | | UPI | Point of Sale (POS) | Payment Gateway | Doorstep Banking | Salary and Vendor Payments | Statutory Paym",
-          " GIFT City | Trade Finance | Loan | GIFT City Current Account | GIFT City Fixed Deposits | | | | | | | | Account For View All | | Domestic Business | Platinum Account - FD Auto-Sweep | Gold Account - 50K AMB | Silver Plus Account - 25K AMB | Silver Account - 10K AMB | | | Importe",
-          " Trusts & Societies | TASC Current Account | | | Custom Domestic Segment | ZERO Balance Account for Merchants | ZERO Balance Account for Professionals | Account for Farmers | | | Specific Purpose | SNRR Account | RERA Account | LOBOPO Account | ESCROW Account | | | | Payment & Co"
-        ]
-      }
+      "tableExcerpts": [
+        "Tag Class | | Security Deposit | (₹) | | Minimum Balance/Initial Recharge | (₹) | | | Car/Jeep/Van/Mini Light Commercial Vehicle | | 4 | | 200 | | 100 | | | Light Commercial Vehicle | | 5 | | 0 | | 400 | | | Bus/Truck (3 axle) | | 6 | | 0 | | 600 | | | Bus/T"
+      ],
+      "status": "ok"
     },
     "airtel": {
       "url": "https://www.airtel.in/fastag-faq/",

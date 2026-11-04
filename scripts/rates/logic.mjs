@@ -139,7 +139,12 @@ export function diagnose(text, spec) {
     windows.push(text.slice(s, m.index + 200))
     re.lastIndex = m.index + 200
   }
-  return { textLength: text.length, anchorAt, windows }
+  // For table readers: the text right after each header that was found, to see how the rows look.
+  const afterHeaders = (spec.rows ?? []).map((row) => {
+    const h = text.match(row.header)
+    return h ? text.slice(h.index, h.index + h[0].length + 600) : null
+  })
+  return { textLength: text.length, anchorAt, afterHeaders, windows }
 }
 
 // ---------- decision logic ----------

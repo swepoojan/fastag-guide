@@ -45,7 +45,7 @@ describe('reading the bank pages', () => {
     const r = extract(prose + 'x '.repeat(1000) + page('idfc') + ' ' + prose, sources.providers.idfc)
     expect(r.values).toEqual({ issuanceFee: 100, securityDeposit: 200, minBalance: 100 })
   })
-  it('ICICI: joining fee with paise, and the class 4 row', () => {
+  it('ICICI: joining fee with paise, and the Car / Jeep / Van row (colour cell skipped)', () => {
     const r = extract(page('icici'), sources.providers.icici)
     expect(r.missing).toEqual([])
     expect(r.values).toEqual({ issuanceFee: 99.12, securityDeposit: 200, minBalance: 100 })

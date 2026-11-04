@@ -21,11 +21,12 @@ export const sources = {
       rows: [{ header: /security\s*deposit[\s|]*minimum\s*balance/i, anchor: /class\s*4\b/i, cells: ['securityDeposit', 'minBalance'], allowNil: ['minBalance'] }],
     },
     icici: {
-      // "Tag Joining Fee* ₹99.12" … "Tag Class | Description | Security Deposit (in ₹) | Threshold amount (in ₹)"
-      // "4 | TATA Ace and similar mini Light Commercial Vehicle | 200 | 100"
+      // "Tag Joining Fee* ₹99.12" … "Deposit Amount for FASTag"
+      // "Tag Class | Description | Tag Colour | Tag Deposit | Minimum Recharge amount"
+      // "4 | Car / Jeep / Van | Violet | 200 | 100"   (the colour cell holds no number, so it's passed over)
       url: 'https://www.icici.bank.in/personal-banking/payments/fastag/fees-and-charges',
       fields: { issuanceFee: { labels: [/joining\s*fee/i], anchor: null } },
-      rows: [{ header: /security\s*deposit[^|]{0,12}[\s|]*threshold/i, anchor: /(?:^|[\s|])4\s*\|?\s*(?=[a-z])/i, cells: ['securityDeposit', 'minBalance'] }],
+      rows: [{ header: /tag\s*deposit[\s|]*minimum\s*recharge/i, anchor: CAR_ROW, cells: ['securityDeposit', 'minBalance'] }],
     },
     axis: {
       // "issuance fee of INR 100" "Refundable security deposit of INR 200" "minimum INR 100"

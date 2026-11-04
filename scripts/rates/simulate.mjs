@@ -16,6 +16,9 @@ const out = process.argv[2]
 if (!out) { console.error('usage: node scripts/rates/simulate.mjs <output.json>'); process.exit(1) }
 
 const rates = JSON.parse(readFileSync(new URL('../../src/data/rates.json', import.meta.url), 'utf8'))
+// Every reader in the demo has already proven itself by reading today's verified figures.
+const READER = 'demo-reader'
+for (const p of Object.values(rates.providers)) p.provenBy = READER
 const page = (name) => htmlToText(readFileSync(new URL(`./fixtures/${name}.html`, import.meta.url), 'utf8'))
 const hdfc = (name) => { const r = extract(page(name), sources.providers.hdfc); return [r, r] }
 const ok = (id) => [{ values: rates.providers[id].values, missing: [] }, { values: rates.providers[id].values, missing: [] }]
@@ -33,7 +36,7 @@ for (const c of checks) {
   for (const id of Object.keys(rates.providers)) {
     const readings = c.pages[id] ?? ok(id)
     const result = validate(readings, rates.providers[id].values)
-    const { entry, events } = applyCheck(rates.providers[id], result, c.when, id)
+    const { entry, events } = applyCheck(rates.providers[id], result, c.when, id, READER)
     rates.providers[id] = entry
     rates.history = trimHistory([...rates.history, ...events])
     if (c.pages[id]) {

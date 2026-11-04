@@ -26,11 +26,11 @@ const pass = rates.passes.values
 
 writeFileSync(dist('llms.txt'), `# FASTAG GUIDE
 
-> A free tool by Technokari that helps Indian car, jeep and van owners pick the cheapest way to pay national highway toll, and compares FASTag providers' charges. Figures are read from official pages and re-checked automatically every day.
+> A free tool by Technokari that helps Indian car, jeep and van owners pick the cheapest way to pay national highway toll, and compares FASTag providers' charges. Bank fees are read from each bank's official page and re-checked automatically every day; toll pass prices are as notified by the government for the tax year.
 
 Site: ${SITE_URL}/
 
-## Toll passes (tax year 2026-27, private non-commercial vehicles)
+## Toll passes (tax year 2026-27, private non-commercial vehicles; notified prices valid until ${rates.passes.validUntil})
 
 - FASTag Annual Pass: ${inr(pass.annual)}; valid for 200 toll plaza crossings or one year, whichever ends first, at national highway and national expressway fee plazas. A return trip counts as two crossings.
 - FASTag Local Pass (from 1 November 2026): ${inr(pass.localOutside)} a year if the plaza is outside municipal or town limits, ${inr(pass.localInside)} if inside. Unlimited crossings at one plaza within 20 km of the owner's registered address. Sold at plazas, and in NHAI's RajmargYatra app from 1 December 2026.

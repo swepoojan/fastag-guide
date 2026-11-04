@@ -8,6 +8,7 @@ export const PASS = {
   localInside: rates.passes.values.localInside, // ₹/year, plaza inside municipal or town limits
   monthlyTypical: 350, // ₹/month, varies by plaza
   verifiedOn: rates.passes.lastVerified,
+  validUntil: rates.passes.validUntil, // notified prices apply until this date
   status: rates.passes.status as VerifyStatus,
 }
 

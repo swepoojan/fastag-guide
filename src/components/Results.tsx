@@ -151,7 +151,7 @@ function PassCard({ pass, status }: { pass: ReturnType<typeof computePasses>; st
                 </a>
               )}
             </div>
-            <p className="mt-4 text-[12.5px] text-white/55">{t.pass.asOf}: {fmtDate(PASS.verifiedOn, lang)}</p>
+            <p className="mt-4 text-[12.5px] text-white/55">{t.pass.asOf}: {fmtDate(PASS.validUntil, lang)}</p>
             {status === 'have' && <p className="mt-4 flex gap-2 text-[13.5px] text-white/75"><ShieldCheck size={16} aria-hidden="true" className="mt-0.5 flex-none" /> {r.keepTag}</p>}
           </div>
         </div>

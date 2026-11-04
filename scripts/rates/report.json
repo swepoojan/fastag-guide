@@ -58,7 +58,7 @@
     "sbi": {
       "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
       "ok": true,
-      "method": "browser",
+      "method": "fetch",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,

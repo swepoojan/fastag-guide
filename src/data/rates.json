@@ -21,8 +21,8 @@
       "status": "ok",
       "lastVerified": "2026-11-04",
       "pending": null,
-      "failures": 1,
-      "provenBy": "9f4edf159e"
+      "failures": 0,
+      "provenBy": "2d9a95a77b"
     },
     "axis": {
       "values": {

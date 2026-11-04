@@ -22,36 +22,22 @@
     },
     "icici": {
       "url": "https://www.icici.bank.in/personal-banking/payments/fastag/fees-and-charges",
-      "ok": false,
-      "method": "browser",
-      "reason": "missing securityDeposit: vehicle row not found under the table header; minBalance: vehicle row not found under the table header",
+      "ok": true,
+      "method": "fetch",
       "found": {
+        "securityDeposit": 200,
+        "minBalance": 100,
         "issuanceFee": 99.12
       },
       "snippets": {
+        "securityDeposit": "Car / Jeep / Van | | Violet | | 200 | | 100",
+        "minBalance": "Car / Jeep / Van | | Violet | | 200 | | 100",
         "issuanceFee": "Joining Fee* | ₹99.12"
       },
-      "status": "ok",
-      "diagnostics": {
-        "textLength": 20943,
-        "anchorAt": null,
-        "afterHeaders": [
-          "Security Deposit (in ₹) | Threshold amount (in ₹) | | 4 | | TATA Ace and similar mini Light Commercial Vehicle | 200 | 100 | | 5 | Light Commercial Vehicle / Mini Bus | 300 | 100 | | 6 | Bus 3 Axle | 400 | 100 | | 6 | Truck 3 Axle | 500 | 100 | | 7 | Bus 2 Axle / Truck 2 Axle | 400 | 100 | | 12 | Tractor / Tractor with trailer / Truck 4/ 5/ 6 Axle | 500 | 100 | | 15 | Truck 7 Axle and above | 500 | 100 | | 16 | Earth Moving / Heavy Construction Machinery | 500 | 100 | | | | | | | TOLL FREE NUMBER | | To know more about FASTag, please call our customer care on toll-free number &lt;1800 2100 104&gt; (Chargeable number: &lt;1860 2"
-        ],
-        "vehicleRows": [
-          "(INR) | | Tag Joining Fee* | ₹99.12 (including GST) | | *Taxes, as applicable, will be levied on all the prescribed fees and charges at the applicable rates. | | | One-Time Tag Deposit Amount for FASTag | | Tag Class | Description | Tag Colour | Tag Deposit | Minimum Recharge amount | | 4 | | Car / Jeep / Van | | Violet | | 200 | | 100 | | | Tag Class | Description | Tag Colour | Tag Deposit | Threshold amount | | 4 | TATA Ace and similar mini Light Commercial Vehicle | Violet | 200 | 100 | | 5 "
-        ],
-        "windows": [
-          "ICICI Bank FASTag Fees & Charges | Cost of New FASTag --> Skip to main content | | | | | | ICICI Bank Logo | | Close | Personal | Personal | | | Accounts | Back Accounts | Close | Savings Account | Salary Account | Cap",
-          " | | Open a Savings Account for seamless payments | | | Apply now | | | | | | | Deposits | Back Deposits | Close | Fixed Deposit | Monthly Pay-out Fixed Deposit | Recurring Deposit | iWish - Goal Based Savings | View all deposits | | | Fixed Deposit Interest Rates | Fixed Deposit",
-          " | | Open NRE/NRO accounts to manage your banking | | | Apply now | | | | | | | Deposits | Back Deposits | Close | Fixed Deposit | Recurring Deposit | Foreign Currency Non-Resident (FCNR)(B) Deposit | Resident Foreign Currency (RFC) Deposit | View all deposits | | | Fixed Deposit",
-          "RFC) Deposit | View all deposits | | | Fixed Deposit Interest Rates | Recurring Deposit Interest Rates | FCNR (B) FD Rates | RFC FD Rates | Fixed Deposit Calculator | | Dream it, achieve it! | | FDs offer stable returns for your dreams | | | Open FD | | | | | | | Investments | Ba",
-          "Close | Home Loan | Loan Against Property | Commercial Property Purchase Loan | Balance Transfer | Overdraft Against Fixed Deposits | Education Loan | Personal Loan | Credit Cards | | | | Home Loans | | Avail digital sanction in 5 simple steps | | | Apply now | | | | | | | Servic",
-          "ount | | | | Accounts that suit business needs! | | | | Apply now | | | | | | | Deposits | Back Deposits | Close | Fixed Deposits | Fixed Deposit backed Overdraft | | | Fixed Deposit Interest Rates | Fixed Deposit Calculator | | Dream it, achieve it! | | | | Open FD | | | | | | |",
-          "rack Applications | Form Center | Online Assist | Information Center | | FAQs | Feedback | Service Requests | Queries | Complaints | Report Suspicious Behaviour | Report unauthorized transaction | | | | | | | Toll Free No 1800 1080 | | Ask iPal | Save Items | Open Accessibility M",
-          "2India | Open 3-in-1 Account | | | | | open hamburger menu | | | | | | | FASTag Fees And Charges | | | | | | | | | | | Payments | FASTag | Fees and Charges | | | FASTag Fees And Charges | | | | | | FASTag charges include tag issuance fee and one-time deposit amount (that will com"
-        ]
-      }
+      "tableExcerpts": [
+        "Tag Deposit | Minimum Recharge amount | | 4 | | Car / Jeep / Van | | Violet | | 200 | | 100 | | | Tag Class | Description | Tag Colour | Tag Deposit | Threshold amount | | 4 | TATA Ace and similar mini Light Commercial Vehic"
+      ],
+      "status": "ok"
     },
     "axis": {
       "url": "https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx",

@@ -7,7 +7,7 @@
         "minBalance": 0
       },
       "status": "ok",
-      "lastVerified": "2026-11-07",
+      "lastVerified": "2026-11-08",
       "pending": null,
       "failures": 0,
       "provenBy": "59992016bd"
@@ -19,7 +19,7 @@
         "minBalance": 100
       },
       "status": "ok",
-      "lastVerified": "2026-11-07",
+      "lastVerified": "2026-11-08",
       "pending": null,
       "failures": 0,
       "provenBy": "2d9a95a77b"
@@ -33,7 +33,7 @@
       "status": "ok",
       "lastVerified": "2026-11-07",
       "pending": null,
-      "failures": 0,
+      "failures": 1,
       "provenBy": "4e107d53d5"
     },
     "sbi": {
@@ -43,7 +43,7 @@
         "minBalance": 100
       },
       "status": "ok",
-      "lastVerified": "2026-11-07",
+      "lastVerified": "2026-11-08",
       "pending": null,
       "failures": 0,
       "provenBy": "a0fdde3e18"
@@ -55,7 +55,7 @@
         "minBalance": 100
       },
       "status": "ok",
-      "lastVerified": "2026-11-07",
+      "lastVerified": "2026-11-08",
       "pending": null,
       "failures": 0,
       "provenBy": "cb71a32567"
@@ -67,7 +67,7 @@
         "minBalance": 150
       },
       "status": "ok",
-      "lastVerified": "2026-11-07",
+      "lastVerified": "2026-11-08",
       "pending": null,
       "failures": 0,
       "provenBy": "9f9b08ec2c"

@@ -1,5 +1,5 @@
 {
-  "checkedOn": "2026-11-09",
+  "checkedOn": "2026-11-10",
   "sources": {
     "hdfc": {
       "url": "https://v.hdfc.bank.in/htdocs/common/fastag/feescharges.html",
@@ -41,25 +41,28 @@
     },
     "axis": {
       "url": "https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx",
-      "ok": true,
+      "ok": false,
       "method": "browser",
+      "reason": "could not load: page.goto: net::ERR_CONNECTION_RESET at https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx\nCall log:\n  - navigating to \"https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx\", waiting until \"networkidle\"\n",
+      "status": "ok"
+    },
+    "sbi": {
+      "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
+      "ok": true,
+      "method": "fetch",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,
         "minBalance": 100
       },
       "snippets": {
-        "issuanceFee": "issuance fee of INR 100",
-        "securityDeposit": "security deposit of INR 200",
-        "minBalance": "Initial wallet top up / recharge of minimum INR 100"
+        "issuanceFee": "Car / Jeep / Van/ Tata Ace and similar mini light commercial vehicle | | 100 | | 200 | | 100",
+        "securityDeposit": "Car / Jeep / Van/ Tata Ace and similar mini light commercial vehicle | | 100 | | 200 | | 100",
+        "minBalance": "Car / Jeep / Van/ Tata Ace and similar mini light commercial vehicle | | 100 | | 200 | | 100"
       },
-      "status": "ok"
-    },
-    "sbi": {
-      "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
-      "ok": false,
-      "method": "browser",
-      "reason": "could not load: timed out",
+      "tableExcerpts": [
+        "Tag Cost | Security Amount (Refundable) | Minimum Balance | Total | | | 1 | | 4 | | Car / Jeep / Van/ Tata Ace and similar mini light commercial vehicle | | 100 | | 200 | | 100(First Time Issuance Top up only) | | 400 | | | 2 | | 5 | | Light Commercial Vehicle"
+      ],
       "status": "ok"
     },
     "idfc": {

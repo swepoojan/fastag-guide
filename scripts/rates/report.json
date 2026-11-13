@@ -1,5 +1,5 @@
 {
-  "checkedOn": "2026-11-12",
+  "checkedOn": "2026-11-13",
   "sources": {
     "hdfc": {
       "url": "https://v.hdfc.bank.in/htdocs/common/fastag/feescharges.html",
@@ -58,7 +58,7 @@
     "sbi": {
       "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
       "ok": true,
-      "method": "fetch",
+      "method": "browser",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,

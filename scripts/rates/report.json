@@ -1,5 +1,5 @@
 {
-  "checkedOn": "2026-11-18",
+  "checkedOn": "2026-11-19",
   "sources": {
     "hdfc": {
       "url": "https://v.hdfc.bank.in/htdocs/common/fastag/feescharges.html",
@@ -42,7 +42,7 @@
     "axis": {
       "url": "https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx",
       "ok": true,
-      "method": "fetch",
+      "method": "browser",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,

@@ -1,5 +1,5 @@
 {
-  "checkedOn": "2026-11-22",
+  "checkedOn": "2026-11-23",
   "sources": {
     "hdfc": {
       "url": "https://v.hdfc.bank.in/htdocs/common/fastag/feescharges.html",
@@ -41,15 +41,24 @@
     },
     "axis": {
       "url": "https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx",
-      "ok": false,
+      "ok": true,
       "method": "browser",
-      "reason": "could not load: page.goto: net::ERR_CONNECTION_RESET at https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx\nCall log:\n  - navigating to \"https://application.axis.bank.in/webforms/axis-support/sub-issues/Cards-fastag-applyforfastag-7.aspx\", waiting until \"networkidle\"\n",
+      "found": {
+        "issuanceFee": 100,
+        "securityDeposit": 200,
+        "minBalance": 100
+      },
+      "snippets": {
+        "issuanceFee": "issuance fee of INR 100",
+        "securityDeposit": "security deposit of INR 200",
+        "minBalance": "Initial wallet top up / recharge of minimum INR 100"
+      },
       "status": "ok"
     },
     "sbi": {
       "url": "https://sbi.bank.in/web/personal-banking/digital/sbi-fastag",
       "ok": true,
-      "method": "browser",
+      "method": "fetch",
       "found": {
         "issuanceFee": 100,
         "securityDeposit": 200,
